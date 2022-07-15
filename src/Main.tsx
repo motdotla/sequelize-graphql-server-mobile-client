@@ -13,17 +13,19 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
-import { useEffect, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider as PaperProvider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
+import { NavigationContainer } from "@react-navigation/native";
 import getTheme from "~config/theme";
 import Navigator from "~screens/Navigator";
 import usePreferences from "~hooks/usePreferences";
 
 export default function Main() {
   const { ready } = useTranslation();
+  const [navigatorReady, setNavigatorReady] = useState(false);
   const {
     preferences: { theme },
   } = usePreferences();
@@ -48,10 +50,12 @@ export default function Main() {
       await SplashScreen.hideAsync();
     };
 
-    if (fontsLoaded && ready) {
+    if (fontsLoaded && ready && navigatorReady) {
       prepare();
     }
-  }, [fontsLoaded, ready]);
+  }, [fontsLoaded, ready, navigatorReady]);
+
+  const onNavigatorReady = useCallback(() => setNavigatorReady(true), []);
 
   const appTheme = useMemo(
     () => (theme === "auto" ? getTheme(colorScheme) : getTheme(theme)),
@@ -64,7 +68,9 @@ export default function Main() {
 
   return (
     <PaperProvider theme={appTheme}>
-      <Navigator />
+      <NavigationContainer theme={appTheme} onReady={onNavigatorReady}>
+        <Navigator />
+      </NavigationContainer>
     </PaperProvider>
   );
 }
