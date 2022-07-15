@@ -16,7 +16,8 @@ import {
 import { useEffect } from "react";
 import { StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import { Text, Provider as PaperProvider } from "react-native-paper";
+import { Text, Provider as PaperProvider, Button } from "react-native-paper";
+import Toast from "react-native-root-toast";
 import theme from "~config/theme";
 
 export default function Main() {
@@ -53,6 +54,7 @@ export default function Main() {
     <PaperProvider theme={theme}>
       <StatusBar />
       <Text>My App</Text>
+      <Button onPress={() => Toast.show("Hello")}>Show</Button>
     </PaperProvider>
   );
 }
