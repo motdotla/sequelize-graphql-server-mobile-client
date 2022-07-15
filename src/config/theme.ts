@@ -1,8 +1,10 @@
-import { DefaultTheme } from "react-native-paper";
-import { Theme } from "react-native-paper/lib/typescript/types";
+import { MD3LightTheme as DefaultTheme, Theme } from "react-native-paper";
 
-const theme: Theme = {
+const theme = {
   ...DefaultTheme,
-};
+  version: 3,
+} as Theme;
+
+export type ThemeOverride = typeof theme;
 
 export default theme;
