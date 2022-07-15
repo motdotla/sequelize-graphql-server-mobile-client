@@ -8,6 +8,8 @@ const {
   SENTRY_PROJECT,
   SENTRY_AUTH_TOKEN,
   SENTRY_DSN,
+  LOCIZE_API_KEY,
+  LOCIZE_PROJECT_ID,
   ENV,
 } = process.env;
 
@@ -58,6 +60,8 @@ const config: ExpoConfig = {
     enableInExpoDevelopment,
     sentryDebug: enableInExpoDevelopment,
     dsn: SENTRY_DSN,
+    locizeApiKey: LOCIZE_API_KEY,
+    locizeProjectId: LOCIZE_PROJECT_ID,
   },
 };
 
