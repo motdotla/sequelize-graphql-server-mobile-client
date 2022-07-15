@@ -10,8 +10,9 @@ i18n
   .init({
     backend: {
       projectId: Constants.manifest?.extra?.locizeProjectId,
-      apiKey: Constants.manifest?.extra?.locizeApiKey,
-      referenceLng: "en",
+      apiKey:
+        Constants.manifest?.extra?.enableInExpoDevelopment &&
+        Constants.manifest?.extra?.locizeApiKey,
     },
     lng: Localization.locale,
     fallbackLng: "en",
