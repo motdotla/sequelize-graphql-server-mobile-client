@@ -1,6 +1,6 @@
 import "dotenv/config";
 import { ExpoConfig } from "@expo/config";
-import pkj from "./package.json";
+import { name, version } from "./package.json";
 
 const {
   APP_NAME,
@@ -14,9 +14,9 @@ const {
 const enableInExpoDevelopment = ENV === "development";
 
 const config: ExpoConfig = {
-  name: APP_NAME || pkj.name,
-  slug: pkj.name,
-  version: pkj.version,
+  name: APP_NAME || name,
+  slug: name,
+  version: version,
   orientation: "portrait",
   icon: "./assets/icon.png",
   userInterfaceStyle: "automatic",
