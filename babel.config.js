@@ -13,7 +13,7 @@ module.exports = function (api) {
         {
           root: ["./"],
           alias: {
-            "^@(.+)": "./src/\\1",
+            "^~(.+)": "./src/\\1",
             assets: "./assets",
           },
         },
