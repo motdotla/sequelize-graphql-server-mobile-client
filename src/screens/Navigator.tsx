@@ -3,15 +3,16 @@ import { View, StatusBar } from "react-native";
 import { Text, Button, useTheme } from "react-native-paper";
 import Toast from "react-native-root-toast";
 import { useTranslation } from "react-i18next";
-import usePreferences from "~hooks/app";
-import { AppColorScheme } from "~config/theme";
+import usePreferences from "~hooks/usePreferences";
+import { AppColorScheme } from "@types";
 
 export default function Navigator() {
   const { t } = useTranslation();
+
   const { colors, dark } = useTheme();
-  const { setTheme } = usePreferences();
+  const { setPreference } = usePreferences();
   const handleTheme = useCallback(
-    (scheme: AppColorScheme) => () => setTheme(scheme),
+    (scheme: AppColorScheme) => () => setPreference("theme", scheme),
     []
   );
   return (

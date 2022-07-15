@@ -17,11 +17,13 @@ import { useEffect, useMemo } from "react";
 import { useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { Provider as PaperProvider } from "react-native-paper";
+import { useTranslation } from "react-i18next";
 import getTheme from "~config/theme";
 import Navigator from "~screens/Navigator";
-import usePreferences from "~hooks/app";
+import usePreferences from "~hooks/usePreferences";
 
 export default function Main() {
+  const { ready } = useTranslation();
   const {
     preferences: { theme },
   } = usePreferences();
@@ -46,17 +48,17 @@ export default function Main() {
       await SplashScreen.hideAsync();
     };
 
-    if (fontsLoaded) {
+    if (fontsLoaded && ready) {
       prepare();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, ready]);
 
   const appTheme = useMemo(
     () => (theme === "auto" ? getTheme(colorScheme) : getTheme(theme)),
     [theme, colorScheme]
   );
 
-  if (!fontsLoaded) {
+  if (!(fontsLoaded && ready)) {
     return null;
   }
 

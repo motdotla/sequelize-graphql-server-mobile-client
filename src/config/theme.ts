@@ -1,11 +1,9 @@
-import { ColorSchemeName } from "react-native";
+import { AppColorScheme } from "@types";
 import {
   MD3LightTheme as PaperLightTheme,
   MD3DarkTheme as PaperDarkTheme,
   Theme,
 } from "react-native-paper";
-
-export type AppColorScheme = ColorSchemeName | "auto";
 
 const lightTheme = {
   ...PaperLightTheme,

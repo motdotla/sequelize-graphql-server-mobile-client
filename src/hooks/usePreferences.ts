@@ -1,6 +1,6 @@
 import { useQuery } from "@apollo/client";
+import { AppColorScheme } from "@types";
 import { useCallback } from "react";
-import { AppColorScheme } from "~config/theme";
 import { APP_PREFERENCES } from "~graphql/queries/Preferences";
 
 type AppPreferences = {
@@ -12,13 +12,13 @@ export default function usePreferences() {
 
   const preferences = data.preferences as AppPreferences;
 
-  const setTheme = useCallback((theme: AppColorScheme) => {
+  const setPreference = useCallback((key: keyof AppPreferences, value) => {
     client.writeQuery({
       query: APP_PREFERENCES,
       data: {
         preferences: {
           ...preferences,
-          theme,
+          [key]: value,
         },
       },
     });
@@ -26,6 +26,6 @@ export default function usePreferences() {
 
   return {
     preferences,
-    setTheme,
+    setPreference,
   };
 }

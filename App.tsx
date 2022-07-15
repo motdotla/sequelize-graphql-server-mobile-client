@@ -1,5 +1,4 @@
-import { Suspense, useEffect, useState } from "react";
-import { ProgressBar } from "react-native-paper";
+import { useEffect, useState } from "react";
 import * as SplashScreen from "expo-splash-screen";
 import { RootSiblingParent } from "react-native-root-siblings";
 import { ApolloProvider } from "@apollo/client";
@@ -29,11 +28,9 @@ export default function App() {
 
   return (
     <RootSiblingParent>
-      <Suspense fallback={<ProgressBar indeterminate />}>
-        <ApolloProvider client={client}>
-          <Main />
-        </ApolloProvider>
-      </Suspense>
+      <ApolloProvider client={client}>
+        <Main />
+      </ApolloProvider>
     </RootSiblingParent>
   );
 }

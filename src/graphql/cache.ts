@@ -8,7 +8,6 @@ const cache = new InMemoryCache({
           read(
             pref = {
               theme: "light",
-              language: "en",
             }
           ) {
             return pref;
