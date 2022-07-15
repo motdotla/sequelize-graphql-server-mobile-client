@@ -13,3 +13,7 @@ web-build/
 # macOS
 .DS_Store
 .env
+
+.env*
+!.env.project
+!.env.vault
