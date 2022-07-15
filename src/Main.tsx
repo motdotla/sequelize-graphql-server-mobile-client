@@ -13,16 +13,19 @@ import {
   Montserrat_800ExtraBold,
   Montserrat_900Black,
 } from "@expo-google-fonts/montserrat";
-import { useEffect } from "react";
-import { StatusBar } from "react-native";
+import { useEffect, useMemo } from "react";
+import { useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import { Text, Provider as PaperProvider, Button } from "react-native-paper";
-import Toast from "react-native-root-toast";
-import { useTranslation } from "react-i18next";
-import theme from "~config/theme";
+import { Provider as PaperProvider } from "react-native-paper";
+import getTheme from "~config/theme";
+import Navigator from "~screens/Navigator";
+import usePreferences from "~hooks/app";
 
 export default function Main() {
-  const { t } = useTranslation();
+  const {
+    preferences: { theme },
+  } = usePreferences();
+  const colorScheme = useColorScheme();
   const [fontsLoaded] = useFonts({
     Montserrat_100Thin,
     Montserrat_300Light,
@@ -48,15 +51,18 @@ export default function Main() {
     }
   }, [fontsLoaded]);
 
+  const appTheme = useMemo(
+    () => (theme === "auto" ? getTheme(colorScheme) : getTheme(theme)),
+    [theme, colorScheme]
+  );
+
   if (!fontsLoaded) {
     return null;
   }
 
   return (
-    <PaperProvider theme={theme}>
-      <StatusBar />
-      <Text>{t("My App")}</Text>
-      <Button onPress={() => Toast.show(t("Hello World!"))}>Show</Button>
+    <PaperProvider theme={appTheme}>
+      <Navigator />
     </PaperProvider>
   );
 }

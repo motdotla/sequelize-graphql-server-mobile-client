@@ -1,10 +1,24 @@
-import { MD3LightTheme as DefaultTheme, Theme } from "react-native-paper";
+import { ColorSchemeName } from "react-native";
+import {
+  MD3LightTheme as PaperLightTheme,
+  MD3DarkTheme as PaperDarkTheme,
+  Theme,
+} from "react-native-paper";
 
-const theme = {
-  ...DefaultTheme,
+export type AppColorScheme = ColorSchemeName | "auto";
+
+const lightTheme = {
+  ...PaperLightTheme,
   version: 3,
 } as Theme;
 
-export type ThemeOverride = typeof theme;
+const darkTheme = {
+  ...PaperDarkTheme,
+  dark: true,
+  version: 3,
+} as Theme;
 
-export default theme;
+const getTheme = (theme: AppColorScheme) =>
+  theme === "light" ? lightTheme : darkTheme;
+
+export default getTheme;
