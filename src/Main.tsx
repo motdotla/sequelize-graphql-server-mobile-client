@@ -1,5 +1,5 @@
 import { Text, Provider as PaperProvider } from "react-native-paper";
-import theme from "./config/theme";
+import theme from "@config/theme";
 
 export default function Main() {
   return (

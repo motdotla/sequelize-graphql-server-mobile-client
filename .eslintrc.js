@@ -22,5 +22,11 @@ module.exports = {
   plugins: ["react", "@typescript-eslint"],
   rules: {
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }],
+    "import/extensions": "never",
+  },
+  settings: {
+    "import/resolver": {
+      "babel-module": { allowExistingDirectories: true },
+    },
   },
 };
