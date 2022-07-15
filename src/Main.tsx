@@ -18,9 +18,11 @@ import { StatusBar } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
 import { Text, Provider as PaperProvider, Button } from "react-native-paper";
 import Toast from "react-native-root-toast";
+import { useTranslation } from "react-i18next";
 import theme from "~config/theme";
 
 export default function Main() {
+  const { t } = useTranslation();
   const [fontsLoaded] = useFonts({
     Montserrat_100Thin,
     Montserrat_300Light,
@@ -53,8 +55,8 @@ export default function Main() {
   return (
     <PaperProvider theme={theme}>
       <StatusBar />
-      <Text>My App</Text>
-      <Button onPress={() => Toast.show("Hello")}>Show</Button>
+      <Text>{t("My App")}</Text>
+      <Button onPress={() => Toast.show(t("Hello World!"))}>Show</Button>
     </PaperProvider>
   );
 }
