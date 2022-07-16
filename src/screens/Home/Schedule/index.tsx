@@ -23,7 +23,7 @@ export default function Schedule() {
     <Drawer.Navigator
       screenOptions={{
         header: (props) => <Header {...props} />,
-        drawerType: "back",
+        drawerType: "slide",
       }}
     >
       <Drawer.Screen name="Calendar" component={Calendar} />

@@ -1,4 +1,4 @@
-import { BackHandler, View } from "react-native";
+import { BackHandler, View, StyleSheet } from "react-native";
 import { FAB, Portal, Text } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
@@ -35,12 +35,7 @@ export default function Calendar() {
   );
 
   return (
-    <View
-      style={{
-        padding: 16,
-        flex: 1,
-      }}
-    >
+    <View style={styles.container}>
       <Text variant="displayLarge">{t("My App")}</Text>
       <Text variant="displayMedium">{t("My App")}</Text>
       <Text variant="displaySmall">{t("My App")}</Text>
@@ -70,11 +65,19 @@ export default function Calendar() {
             },
           ]}
           onStateChange={onFabStateChange}
-          style={{
-            paddingBottom: 72,
-          }}
+          style={styles.fab}
         />
       </Portal>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 16,
+  },
+  fab: {
+    paddingBottom: 72,
+  },
+});
