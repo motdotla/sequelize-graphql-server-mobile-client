@@ -17,7 +17,6 @@ function Header({ navigation, options }: DrawerHeaderProps) {
     <Appbar mode="center-aligned">
       <Appbar.Action icon="menu" onPress={navigation.openDrawer} />
       <Appbar.Content title={options.title} />
-      <Appbar.Action icon="dots-vertical" onPress={() => null} />
     </Appbar>
   );
 }
