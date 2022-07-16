@@ -53,3 +53,21 @@ declare global {
 }
 
 export type IconName = ComponentProps<typeof Icon>["name"];
+
+export type LoginInput = {
+  email: string;
+  password: string;
+};
+
+export type RegisterInput = LoginInput & {
+  firstName: string;
+  lastName: string;
+};
+
+export type ForgotPasswordInput = {
+  email: string;
+};
+
+export type ResetPasswordInput = {
+  password: string;
+};

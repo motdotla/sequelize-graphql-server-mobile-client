@@ -4,8 +4,7 @@ import {
 } from "@react-navigation/native-stack";
 import { getHeaderTitle } from "@react-navigation/elements";
 import { View, StatusBar } from "react-native";
-import { useTheme } from "react-native-paper";
-import { Appbar } from "react-native-paper";
+import { useTheme, Appbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { RootStackParamList } from "types";
 import Home from "./Home";
