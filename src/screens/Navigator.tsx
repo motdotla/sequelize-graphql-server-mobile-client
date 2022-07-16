@@ -44,34 +44,36 @@ export default function Navigator() {
           header: (props) => <Header {...props} />,
         }}
       >
-        <Stack.Screen
-          name="Login"
-          component={Login}
-          options={{
-            title: t("Login"),
-          }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={Register}
-          options={{
-            title: t("Register"),
-          }}
-        />
-        <Stack.Screen
-          name="ForgotPassword"
-          component={ForgotPassword}
-          options={{
-            title: t("Forgot Password"),
-          }}
-        />
-        <Stack.Screen
-          name="ResetPassword"
-          component={ResetPassword}
-          options={{
-            title: t("Reset Password"),
-          }}
-        />
+        <Stack.Group>
+          <Stack.Screen
+            name="Login"
+            component={Login}
+            options={{
+              title: t("Login"),
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{
+              title: t("Register"),
+            }}
+          />
+          <Stack.Screen
+            name="ForgotPassword"
+            component={ForgotPassword}
+            options={{
+              title: t("Forgot Password"),
+            }}
+          />
+          <Stack.Screen
+            name="ResetPassword"
+            component={ResetPassword}
+            options={{
+              title: t("Reset Password"),
+            }}
+          />
+        </Stack.Group>
         <Stack.Screen
           name="Home"
           component={Home}
