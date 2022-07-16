@@ -1,9 +1,9 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { View, StatusBar } from "react-native";
 import { useTheme } from "react-native-paper";
-import { RootStackParamList } from "@types";
 import Settings from "./Settings";
 import NavBar from "~components/NavBar";
+import { RootStackParamList } from "types";
 import Home from "./Home";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
