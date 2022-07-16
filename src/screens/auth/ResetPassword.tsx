@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     padding: 16,
+    paddingBottom: 48,
     justifyContent: "flex-end",
   },
   gap: {

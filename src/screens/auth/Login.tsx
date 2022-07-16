@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
 import { TextInput, Button } from "react-native-paper";
 import { RootStackScreenProps } from "types";
+import GoogleLogin from "./GoogleLogin";
 
 export default function Login({ navigation }: RootStackScreenProps<"Login">) {
   const { t } = useTranslation();
@@ -61,6 +62,7 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
       >
         {t("Don't have an account?")}
       </Button>
+      <GoogleLogin />
     </ScrollView>
   );
 }
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     flexGrow: 1,
     padding: 16,
+    paddingBottom: 48,
     justifyContent: "flex-end",
   },
   gap: {
