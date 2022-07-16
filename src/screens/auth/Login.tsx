@@ -17,7 +17,6 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
       <View style={styles.gap}>
         <TextInput
           dense
-          autoFocus
           blurOnSubmit={false}
           onSubmitEditing={() => passwordInputRef.current?.focus()}
           autoComplete="email"
