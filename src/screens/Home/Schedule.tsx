@@ -4,8 +4,7 @@ import { Text, Button } from "react-native-paper";
 import Toast from "react-native-root-toast";
 import { useTranslation } from "react-i18next";
 import usePreferences from "~hooks/usePreferences";
-import { AppColorScheme, HomeTabScreenProps } from "@types";
-
+import { AppColorScheme, HomeTabScreenProps } from "types";
 export default function Schedule({
   navigation,
 }: HomeTabScreenProps<"Schedule">) {

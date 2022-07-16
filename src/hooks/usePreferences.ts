@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
-import { AppColorScheme } from "@types";
 import { useCallback } from "react";
 import { APP_PREFERENCES } from "~graphql/queries/Preferences";
+import { AppColorScheme } from "types";
 
 type AppPreferences = {
   theme: AppColorScheme;

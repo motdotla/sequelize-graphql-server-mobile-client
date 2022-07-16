@@ -15,7 +15,7 @@ import {
 } from "react-native-paper";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import { IconName } from "@types";
+import { IconName } from "types";
 
 import type {
   MaterialBottomTabDescriptorMap,

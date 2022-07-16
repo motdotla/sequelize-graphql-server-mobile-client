@@ -1,3 +1,4 @@
+import { ComponentProps } from "react";
 import { ColorSchemeName } from "react-native";
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import {
@@ -5,6 +6,7 @@ import {
   NavigatorScreenParams,
 } from "@react-navigation/native";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
+import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 export type AppColorScheme = ColorSchemeName | "auto";
 

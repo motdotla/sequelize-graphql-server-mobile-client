@@ -1,8 +1,8 @@
 import Schedule from "./Schedule";
 import Account from "./Account";
-import { HomeTabParamList, IconName } from "@types";
 import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import { HomeTabParamList, IconName } from "types";
 
 const Tab = createMaterialBottomTabNavigator<HomeTabParamList>();
 
@@ -15,7 +15,7 @@ export default function Home() {
       screenOptions={({ route }) => {
         return {
           tabBarIcon: ({ focused, color }) => {
-            let iconName: IconName;
+            let iconName: IconName = "information";
 
             if (route.name === "Schedule") {
               iconName = focused ? "calendar-clock" : "calendar-clock-outline";

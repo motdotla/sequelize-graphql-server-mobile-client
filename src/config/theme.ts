@@ -1,4 +1,3 @@
-import { AppColorScheme } from "@types";
 import {
   MD3LightTheme as PaperLightTheme,
   MD3DarkTheme as PaperDarkTheme,
@@ -8,6 +7,7 @@ import {
   DarkTheme as NavigationDarkTheme,
 } from "@react-navigation/native";
 import deepmerge from "deepmerge";
+import { AppColorScheme } from "types";
 
 const LightTheme = deepmerge(NavigationDefaultTheme, PaperLightTheme);
 const DarkTheme = deepmerge(NavigationDarkTheme, PaperDarkTheme);
