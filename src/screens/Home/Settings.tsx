@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { View } from "react-native";
 import { Appbar, Text } from "react-native-paper";
-import usePreferences from "~hooks/usePreferences";
+import { usePreferences } from "~hooks/app";
 
 export default function Account() {
   const { t } = useTranslation();

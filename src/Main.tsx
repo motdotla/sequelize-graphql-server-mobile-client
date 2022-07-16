@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next";
 import { NavigationContainer } from "@react-navigation/native";
 import getTheme from "~config/theme";
 import Navigator from "~screens/Navigator";
-import usePreferences from "~hooks/usePreferences";
+import { usePreferences } from "~hooks/app";
 
 export default function Main() {
   const { ready } = useTranslation();
