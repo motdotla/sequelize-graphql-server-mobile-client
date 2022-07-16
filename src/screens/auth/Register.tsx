@@ -6,6 +6,7 @@ import { TextInput, Button, HelperText } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import * as Localization from "expo-localization";
 import { RegisterInput } from "types";
 
 export default function Register() {
@@ -50,6 +51,8 @@ export default function Register() {
       lastName: "",
       email: "",
       password: "",
+      locale: Localization.locale,
+      timezone: Localization.timezone,
     },
   });
 

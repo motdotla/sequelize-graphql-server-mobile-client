@@ -62,6 +62,8 @@ export type LoginInput = {
 export type RegisterInput = LoginInput & {
   firstName: string;
   lastName: string;
+  timezone: string;
+  locale: string;
 };
 
 export type ForgotPasswordInput = {

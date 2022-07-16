@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const APP_PREFERENCES = gql`
+export const PREFERENCES = gql`
   query AppPreferences {
     preferences @client {
       theme
