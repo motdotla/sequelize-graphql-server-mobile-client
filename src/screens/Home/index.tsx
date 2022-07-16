@@ -1,4 +1,4 @@
-import createMaterialBottomTabNavigator from "~screens/components/MD3BottomTabs/createMaterialBottomTabNavigator";
+import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 import { HomeTabParamList, IconName } from "types";

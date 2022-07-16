@@ -13,7 +13,7 @@ import type {
   MaterialBottomTabNavigationConfig,
   MaterialBottomTabNavigationEventMap,
   MaterialBottomTabNavigationOptions,
-} from "~screens/components/MD3BottomTabs/types";
+} from "~components/MD3BottomTabs/types";
 
 type Props = DefaultNavigatorOptions<
   ParamListBase,
