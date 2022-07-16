@@ -5,6 +5,7 @@ import { RootStackParamList } from "@types";
 import Home from "./Home";
 import Settings from "./Settings";
 import Profile from "./Profile";
+import NavBar from "~components/NavBar";
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -21,7 +22,12 @@ export default function Navigator() {
         backgroundColor={colors.background}
         barStyle={dark ? "light-content" : "dark-content"}
       />
-      <Stack.Navigator>
+      <Stack.Navigator
+        initialRouteName="Home"
+        screenOptions={{
+          header: (props) => <NavBar {...props} />,
+        }}
+      >
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Settings" component={Settings} />
         <Stack.Screen name="Profile" component={Profile} />

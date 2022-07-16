@@ -4,9 +4,12 @@ import { Text, Button } from "react-native-paper";
 import Toast from "react-native-root-toast";
 import { useTranslation } from "react-i18next";
 import usePreferences from "~hooks/usePreferences";
-import { AppColorScheme } from "@types";
+import { AppColorScheme, RootStackParamList } from "@types";
+import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
-export default function Home() {
+type Prop = NativeStackScreenProps<RootStackParamList, "Home">;
+
+export default function Home({ navigation }: Prop) {
   const { t } = useTranslation();
   const { setPreference } = usePreferences();
   const handleTheme = useCallback(
@@ -20,6 +23,7 @@ export default function Home() {
       <Button onPress={handleTheme("dark")}>{t("Dark")}</Button>
       <Button onPress={handleTheme("auto")}>{t("Auto")}</Button>
       <Button onPress={() => Toast.show(t("Hello World!"))}>Show</Button>
+      <Button onPress={() => navigation.navigate("Profile")}>Profile</Button>
     </View>
   );
 }
