@@ -7,11 +7,13 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { LoginInput, RootStackScreenProps } from "types";
+import useLoginWithEmail from "~hooks/api/useLoginWithEmail";
 import GoogleLogin from "./GoogleLogin";
 
 export default function Login({ navigation }: RootStackScreenProps<"Login">) {
   const { t } = useTranslation();
   const passwordInputRef = useRef<RTextInput>(null);
+  const { onSubmit, loading } = useLoginWithEmail();
 
   const schema = useMemo(
     () =>
@@ -101,8 +103,10 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
         </Button>
       </View>
       <Button
+        loading={loading}
+        disabled={loading}
         mode="contained"
-        onPress={handleSubmit(console.log)}
+        onPress={handleSubmit(onSubmit)}
         style={styles.gap}
       >
         {t("Login")}

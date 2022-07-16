@@ -54,6 +54,17 @@ declare global {
 
 export type IconName = ComponentProps<typeof Icon>["name"];
 
+export type AppPreferences = {
+  theme: AppColorScheme;
+};
+
+export type AuthState = {
+  accessToken: string;
+  refreshToken: string;
+};
+
+// Inputs
+
 export type LoginInput = {
   email: string;
   password: string;
@@ -72,13 +83,42 @@ export type ForgotPasswordInput = {
 
 export type ResetPasswordInput = {
   password: string;
+  token: string;
 };
 
-export type AppPreferences = {
-  theme: AppColorScheme;
+export type SocialLoginInput = {
+  provider: "GOOGLE";
+  token: string;
 };
 
-export type AuthState = {
+// Response
+
+export interface Response {
+  code: string;
+  success: boolean;
+  message: string;
+}
+
+export interface DeleteMutationResponse extends Response {
+  id: string;
+}
+
+export interface FieldError {
+  message: string;
+  field: string;
+}
+
+export interface FormErrors {
+  errors: FieldError[];
+}
+
+export interface RequestFormResponse extends Response, FormErrors {}
+
+export interface AuthMutationResponse extends Response {
   accessToken: string;
   refreshToken: string;
-};
+}
+
+export interface AuthFormMutationResponse
+  extends AuthMutationResponse,
+    FormErrors {}
