@@ -18,7 +18,7 @@ export type DrawerParamList = {
 export type HomeTabParamList = {
   Schedule: NavigatorScreenParams<DrawerParamList>;
   Notifications: undefined;
-  Account: undefined;
+  Settings: undefined;
 };
 
 export type RootStackParamList = {
@@ -29,7 +29,6 @@ export type RootStackParamList = {
     token: string;
   };
   Home: NavigatorScreenParams<HomeTabParamList>;
-  Settings: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

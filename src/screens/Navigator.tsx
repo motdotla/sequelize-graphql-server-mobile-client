@@ -5,10 +5,8 @@ import {
 import { getHeaderTitle } from "@react-navigation/elements";
 import { View, StatusBar } from "react-native";
 import { useTheme } from "react-native-paper";
-import Settings from "./Settings";
 import { RootStackParamList } from "types";
 import Home from "./Home";
-import { useTranslation } from "react-i18next";
 import { Appbar } from "react-native-paper";
 
 function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
@@ -24,7 +22,6 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function Navigator() {
   const { colors, dark } = useTheme();
-  const { t } = useTranslation();
   return (
     <View
       style={{
@@ -47,13 +44,6 @@ export default function Navigator() {
           component={Home}
           options={{
             headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Settings"
-          component={Settings}
-          options={{
-            title: t("Settings"),
           }}
         />
       </Stack.Navigator>
