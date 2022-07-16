@@ -4,10 +4,11 @@ import { Text, Button } from "react-native-paper";
 import Toast from "react-native-root-toast";
 import { useTranslation } from "react-i18next";
 import usePreferences from "~hooks/usePreferences";
-import { AppColorScheme, HomeTabScreenProps } from "types";
-export default function Schedule({
+import { AppColorScheme, ScheduleScreenProps } from "types";
+
+export default function Calendar({
   navigation,
-}: HomeTabScreenProps<"Schedule">) {
+}: ScheduleScreenProps<"Calendar">) {
   const { t } = useTranslation();
   const { setPreference } = usePreferences();
   const handleTheme = useCallback(
@@ -15,7 +16,11 @@ export default function Schedule({
     []
   );
   return (
-    <View>
+    <View
+      style={{
+        padding: 16,
+      }}
+    >
       <Text>{t("My App")}</Text>
       <Button onPress={handleTheme("light")}>{t("Light")}</Button>
       <Button onPress={handleTheme("dark")}>{t("Dark")}</Button>

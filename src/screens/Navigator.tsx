@@ -2,6 +2,7 @@ import {
   createNativeStackNavigator,
   NativeStackHeaderProps,
 } from "@react-navigation/native-stack";
+import { getHeaderTitle } from "@react-navigation/elements";
 import { View, StatusBar } from "react-native";
 import { useTheme } from "react-native-paper";
 import Settings from "./Settings";
@@ -10,11 +11,11 @@ import Home from "./Home";
 import { useTranslation } from "react-i18next";
 import { Appbar } from "react-native-paper";
 
-function Header({ navigation, back, options }: NativeStackHeaderProps) {
+function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
   return (
     <Appbar elevated mode="center-aligned">
       {back ? <Appbar.BackAction onPress={navigation.goBack} /> : null}
-      <Appbar.Content title={options.title} />
+      <Appbar.Content title={getHeaderTitle(options, route.name)} />
     </Appbar>
   );
 }
@@ -44,7 +45,9 @@ export default function Navigator() {
         <Stack.Screen
           name="Home"
           component={Home}
-          options={{ headerShown: false }}
+          options={{
+            headerShown: false,
+          }}
         />
         <Stack.Screen
           name="Settings"

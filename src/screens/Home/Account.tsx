@@ -1,5 +1,10 @@
+import { View } from "react-native";
 import { Text } from "react-native-paper";
 
 export default function Account() {
-  return <Text>Profile</Text>;
+  return (
+    <View style={{ padding: 16 }}>
+      <Text>Account</Text>
+    </View>
+  );
 }

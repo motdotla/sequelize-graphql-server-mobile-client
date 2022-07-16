@@ -5,13 +5,18 @@ import {
   CompositeScreenProps,
   NavigatorScreenParams,
 } from "@react-navigation/native";
+import type { DrawerScreenProps } from "@react-navigation/drawer";
 import type { NativeStackScreenProps } from "@react-navigation/native-stack";
 import Icon from "@expo/vector-icons/MaterialCommunityIcons";
 
 export type AppColorScheme = ColorSchemeName | "auto";
 
+export type DrawerParamList = {
+  Calendar: undefined;
+};
+
 export type HomeTabParamList = {
-  Schedule: undefined;
+  Schedule: NavigatorScreenParams<DrawerParamList>;
   Notifications: undefined;
   Account: undefined;
 };
@@ -33,6 +38,12 @@ export type RootStackScreenProps<T extends keyof RootStackParamList> =
 export type HomeTabScreenProps<T extends keyof HomeTabParamList> =
   CompositeScreenProps<
     BottomTabScreenProps<HomeTabParamList, T>,
+    RootStackScreenProps<keyof RootStackParamList>
+  >;
+
+export type ScheduleScreenProps<T extends keyof DrawerParamList> =
+  CompositeScreenProps<
+    DrawerScreenProps<DrawerParamList, T>,
     RootStackScreenProps<keyof RootStackParamList>
   >;
 
