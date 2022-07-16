@@ -10,7 +10,21 @@ export default function Calendar() {
         padding: 16,
       }}
     >
-      <Text>{t("My App")}</Text>
+      <Text variant="displayLarge">{t("My App")}</Text>
+      <Text variant="displayMedium">{t("My App")}</Text>
+      <Text variant="displaySmall">{t("My App")}</Text>
+      <Text variant="headlineLarge">{t("My App")}</Text>
+      <Text variant="headlineMedium">{t("My App")}</Text>
+      <Text variant="headlineSmall">{t("My App")}</Text>
+      <Text variant="titleLarge">{t("My App")}</Text>
+      <Text variant="titleMedium">{t("My App")}</Text>
+      <Text variant="titleSmall">{t("My App")}</Text>
+      <Text variant="bodyLarge">{t("My App")}</Text>
+      <Text variant="bodyMedium">{t("My App")}</Text>
+      <Text variant="bodySmall">{t("My App")}</Text>
+      <Text variant="labelLarge">{t("My App")}</Text>
+      <Text variant="labelMedium">{t("My App")}</Text>
+      <Text variant="labelSmall">{t("My App")}</Text>
     </View>
   );
 }
