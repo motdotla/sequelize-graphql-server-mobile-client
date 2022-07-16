@@ -5,6 +5,7 @@ import {
   DrawerHeaderProps,
   DrawerItemList,
 } from "@react-navigation/drawer";
+import { useTranslation } from "react-i18next";
 import { Appbar, useTheme } from "react-native-paper";
 import { DrawerParamList } from "types";
 import Calendar from "./Calendar";
@@ -31,6 +32,7 @@ function Sidebar(props: DrawerContentComponentProps) {
 
 export default function Schedule() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   return (
     <Drawer.Navigator
       drawerContent={(props) => <Sidebar {...props} />}
@@ -42,7 +44,13 @@ export default function Schedule() {
         },
       }}
     >
-      <Drawer.Screen name="Calendar" component={Calendar} />
+      <Drawer.Screen
+        name="Calendar"
+        component={Calendar}
+        options={{
+          title: t("Calendar"),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
