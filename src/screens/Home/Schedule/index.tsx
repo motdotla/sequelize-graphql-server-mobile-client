@@ -1,8 +1,11 @@
 import {
   createDrawerNavigator,
+  DrawerContentComponentProps,
+  DrawerContentScrollView,
   DrawerHeaderProps,
+  DrawerItemList,
 } from "@react-navigation/drawer";
-import { Appbar } from "react-native-paper";
+import { Appbar, useTheme } from "react-native-paper";
 import { DrawerParamList } from "types";
 import Calendar from "./Calendar";
 
@@ -18,12 +21,25 @@ function Header({ navigation, options }: DrawerHeaderProps) {
   );
 }
 
+function Sidebar(props: DrawerContentComponentProps) {
+  return (
+    <DrawerContentScrollView {...props}>
+      <DrawerItemList {...props} />
+    </DrawerContentScrollView>
+  );
+}
+
 export default function Schedule() {
+  const { colors } = useTheme();
   return (
     <Drawer.Navigator
+      drawerContent={(props) => <Sidebar {...props} />}
       screenOptions={{
         header: (props) => <Header {...props} />,
         drawerType: "slide",
+        drawerStyle: {
+          backgroundColor: colors.background,
+        },
       }}
     >
       <Drawer.Screen name="Calendar" component={Calendar} />
