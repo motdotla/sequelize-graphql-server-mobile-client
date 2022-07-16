@@ -1,13 +1,44 @@
-import { View } from "react-native";
-import { Text } from "react-native-paper";
+import { BackHandler, View } from "react-native";
+import { FAB, Portal, Text } from "react-native-paper";
 import { useTranslation } from "react-i18next";
+import { useCallback, useState } from "react";
+import { useFocusEffect, useIsFocused } from "@react-navigation/native";
+import { useDrawerStatus } from "@react-navigation/drawer";
 
 export default function Calendar() {
   const { t } = useTranslation();
+  const isFocused = useIsFocused();
+  const drawerStatus = useDrawerStatus();
+  const [openFab, setOpenFab] = useState(false);
+  const onFabStateChange = useCallback(
+    ({ open }: { open: boolean }) => setOpenFab(open),
+    []
+  );
+
+  const visible = isFocused && drawerStatus === "closed";
+
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        if (openFab) {
+          setOpenFab(false);
+          return true;
+        }
+        return false;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+    }, [openFab])
+  );
+
   return (
     <View
       style={{
         padding: 16,
+        flex: 1,
       }}
     >
       <Text variant="displayLarge">{t("My App")}</Text>
@@ -25,6 +56,25 @@ export default function Calendar() {
       <Text variant="labelLarge">{t("My App")}</Text>
       <Text variant="labelMedium">{t("My App")}</Text>
       <Text variant="labelSmall">{t("My App")}</Text>
+      <Portal>
+        <FAB.Group
+          visible={visible}
+          open={openFab}
+          icon={openFab ? "calendar-today" : "plus"}
+          actions={[
+            { icon: "pin", label: t("Pin schedule"), onPress: () => null },
+            {
+              icon: "pencil",
+              label: t("Create schedule"),
+              onPress: () => null,
+            },
+          ]}
+          onStateChange={onFabStateChange}
+          style={{
+            paddingBottom: 72,
+          }}
+        />
+      </Portal>
     </View>
   );
 }
