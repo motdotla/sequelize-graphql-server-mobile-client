@@ -1,8 +1,8 @@
-import Schedule from "./Schedule";
 import Account from "./Account";
-import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
+import createMaterialBottomTabNavigator from "~screens/components/MD3BottomTabs/createMaterialBottomTabNavigator";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { HomeTabParamList, IconName } from "types";
+import Drawer from "./Drawer";
 
 const Tab = createMaterialBottomTabNavigator<HomeTabParamList>();
 
@@ -30,7 +30,7 @@ export default function Home() {
         };
       }}
     >
-      <Tab.Screen name="Schedule" component={Schedule} />
+      <Tab.Screen name="Schedule" component={Drawer} />
       <Tab.Screen name="Account" component={Account} />
     </Tab.Navigator>
   );
