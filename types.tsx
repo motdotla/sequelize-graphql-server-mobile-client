@@ -73,3 +73,12 @@ export type ForgotPasswordInput = {
 export type ResetPasswordInput = {
   password: string;
 };
+
+export type AppPreferences = {
+  theme: AppColorScheme;
+};
+
+export type AuthState = {
+  accessToken: string;
+  refreshToken: string;
+};

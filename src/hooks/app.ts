@@ -1,11 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { useCallback } from "react";
-import { PREFERENCES } from "~graphql/queries/app";
-import { AppColorScheme } from "types";
-
-type AppPreferences = {
-  theme: AppColorScheme;
-};
+import { AUTH_STATE, PREFERENCES } from "~graphql/queries/app";
+import { AppColorScheme, AppPreferences, AuthState } from "types";
 
 export function usePreferences() {
   const { data, client } = useQuery(PREFERENCES);
@@ -27,5 +23,16 @@ export function usePreferences() {
   return {
     preferences,
     setPreference,
+  };
+}
+
+export function useAuth() {
+  const { data } = useQuery(AUTH_STATE);
+
+  const tokens = data?.auth as AuthState;
+
+  return {
+    ...tokens,
+    isLoggedIn: !!tokens,
   };
 }

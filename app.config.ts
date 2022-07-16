@@ -11,6 +11,8 @@ const {
   LOCIZE_API_KEY,
   LOCIZE_PROJECT_ID,
   ENV,
+  CLIENT_ID,
+  BASE_URL,
 } = process.env;
 
 const enableInExpoDevelopment = ENV === "development";
@@ -62,6 +64,9 @@ const config: ExpoConfig = {
     dsn: SENTRY_DSN,
     locizeApiKey: LOCIZE_API_KEY,
     locizeProjectId: LOCIZE_PROJECT_ID,
+    clientId: CLIENT_ID,
+    graphqlEndpoint: `${BASE_URL}/graphql`,
+    restEndpoint: `${BASE_URL}/v1`,
   },
 };
 
