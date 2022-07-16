@@ -27,7 +27,7 @@ export default function Account() {
           padding: 16,
         }}
       >
-        <Text>{t("Settingr")}</Text>
+        <Text>{t("Setting")}</Text>
       </View>
     </>
   );
