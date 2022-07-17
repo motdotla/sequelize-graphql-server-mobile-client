@@ -2,19 +2,22 @@ import { useMemo, useRef } from "react";
 import { StyleSheet, View, TextInput as RTextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, HelperText } from "react-native-paper";
+import { TextInput, HelperText, Snackbar } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import * as Localization from "expo-localization";
 import Button from "~components/Button";
 import { RegisterInput } from "types";
+import useRegisterWithEmail from "~hooks/api/useRegisterWithEmail";
 
 export default function Register() {
   const { t } = useTranslation();
   const lastNameInputRef = useRef<RTextInput>(null);
   const emailInputRef = useRef<RTextInput>(null);
   const passwordInputRef = useRef<RTextInput>(null);
+
+  const { loading, onSubmit, data, reset } = useRegisterWithEmail();
 
   const schema = useMemo(
     () =>
@@ -56,6 +59,8 @@ export default function Register() {
       timezone: Localization.timezone,
     },
   });
+
+  console.log(Localization.locale, Localization.timezone);
 
   return (
     <ScrollView
@@ -175,9 +180,21 @@ export default function Register() {
           </View>
         )}
       />
-      <Button mode="contained" onPress={handleSubmit(console.log)}>
+      <Button
+        mode="contained"
+        loading={loading}
+        disabled={loading}
+        onPress={handleSubmit(onSubmit)}
+      >
         {t("Create account")}
       </Button>
+      <Snackbar
+        onDismiss={reset}
+        visible={!!data && !data.success}
+        wrapperStyle={{ alignSelf: "center" }}
+      >
+        {data?.message}
+      </Snackbar>
     </ScrollView>
   );
 }
