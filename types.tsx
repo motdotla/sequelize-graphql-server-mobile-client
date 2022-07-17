@@ -122,3 +122,26 @@ export interface AuthMutationResponse extends Response {
 export interface AuthFormMutationResponse
   extends AuthMutationResponse,
     FormErrors {}
+
+type Photo = {
+  url: string;
+  thumbnail: string;
+};
+
+type User = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  fullName: string;
+  email: string;
+  username: string;
+  avatar: Photo | null;
+  socialAvatarURL: string | null;
+  locale: string;
+  timezone: string;
+  emailVerified: boolean;
+};
+
+export interface UserPayload extends Response {
+  user: User;
+}

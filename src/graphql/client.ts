@@ -25,7 +25,7 @@ const authLink = new ApolloLink((operation, forward) => {
       headers: {
         ...headers,
         client_id: Constants.manifest?.extra?.clientId,
-        authorization: data?.auth?.accessToken || "",
+        authorization: data?.auth ? `Bearer ${data.auth.accessToken}` : "",
       },
     };
   });

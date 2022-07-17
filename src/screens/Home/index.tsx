@@ -1,7 +1,9 @@
-import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
+import { ProgressBar } from "react-native-paper";
 import { HomeTabParamList, IconName } from "types";
+import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
+import useMe from "~hooks/api/useMe";
 import Schedule from "./Schedule";
 import Settings from "./Settings";
 
@@ -9,6 +11,12 @@ const Tab = createMaterialBottomTabNavigator<HomeTabParamList>();
 
 export default function Home() {
   const { t } = useTranslation();
+  const { loading } = useMe();
+
+  if (loading) {
+    return <ProgressBar indeterminate />;
+  }
+
   return (
     <Tab.Navigator
       initialRouteName="Schedule"
