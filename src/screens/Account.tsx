@@ -48,7 +48,7 @@ export default function Account() {
         title: t("Log Out"),
       },
     ],
-    []
+    [t]
   );
 
   const onPressItem = useCallback(

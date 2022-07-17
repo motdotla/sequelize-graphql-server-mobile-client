@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View, ScrollView, StyleSheet } from "react-native";
 import { Appbar, List, Text } from "react-native-paper";
@@ -6,11 +6,19 @@ import Constants from "expo-constants";
 import useMe from "~hooks/api/useMe";
 import { usePreferences } from "~hooks/app";
 import { HomeTabScreenProps } from "types";
+import ThemePicker from "./components/ThemePicker";
 
 export default function Settings({
   navigation,
 }: HomeTabScreenProps<"Settings">) {
   const { t } = useTranslation();
+  const [openThemePicker, setOpenThemePicker] = useState(false);
+
+  const toggleThemePicker = useCallback(
+    () => setOpenThemePicker((state) => !state),
+    []
+  );
+
   const {
     preferences: { theme },
   } = usePreferences();
@@ -60,7 +68,7 @@ export default function Settings({
         icon: "email-outline",
       },
     ],
-    [t, user]
+    [t, user, theme]
   );
 
   const onPressItem = useCallback(
@@ -68,6 +76,10 @@ export default function Settings({
       switch (key) {
         case "account": {
           navigation.navigate("Account");
+          break;
+        }
+        case "theme": {
+          toggleThemePicker();
           break;
         }
       }
@@ -95,6 +107,7 @@ export default function Settings({
         <View style={styles.footer}>
           <Text variant="labelSmall">{Constants.manifest?.version}</Text>
         </View>
+        <ThemePicker visible={openThemePicker} onDismiss={toggleThemePicker} />
       </ScrollView>
     </>
   );
