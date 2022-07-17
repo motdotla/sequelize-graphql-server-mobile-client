@@ -4,7 +4,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
 import { Locale, RootStackScreenProps } from "types";
 import ErrorState from "~components/ErrorState";
-import useGetLocales from "~hooks/api/useGetLocales";
+import { useGetLocales, useUpdateLocale } from "~hooks/api/useLocales";
 import useMe from "~hooks/api/useMe";
 
 const keyExtractor = (item: Locale) => item.code;
@@ -14,6 +14,7 @@ export default function Locales({
 }: RootStackScreenProps<"Locales">) {
   const { t } = useTranslation();
   const { loading, data, error, onRefresh } = useGetLocales();
+  const { loading: submitting, onSubmit } = useUpdateLocale();
   const { data: me } = useMe();
   const [search, setSearch] = useState("");
 
@@ -21,10 +22,7 @@ export default function Locales({
     user: { locale },
   } = me!;
 
-  const onPressItem = useCallback(
-    (value: string) => () => console.log(value),
-    []
-  );
+  const onPressItem = useCallback((value: string) => () => onSubmit(value), []);
 
   const renderItem = useCallback(
     ({ item: { code, name } }) => {
@@ -59,6 +57,7 @@ export default function Locales({
         onIconPress={navigation.goBack}
         theme={{ roundness: 0 }}
       />
+      {submitting && <ProgressBar indeterminate />}
       <FlatList
         data={data?.filter((item) =>
           item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())

@@ -4,7 +4,7 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
 import { RootStackScreenProps, Timezone } from "types";
 import ErrorState from "~components/ErrorState";
-import useGetTimezones from "~hooks/api/useGetTimezones";
+import { useGetTimezones, useUpdateTimezone } from "~hooks/api/useTimezones";
 import useMe from "~hooks/api/useMe";
 
 const keyExtractor = (item: Timezone) => item.timeZone;
@@ -14,6 +14,7 @@ export default function Timezones({
 }: RootStackScreenProps<"Timezones">) {
   const { t } = useTranslation();
   const { loading, data, error, onRefresh } = useGetTimezones();
+  const { loading: submitting, onSubmit } = useUpdateTimezone();
   const { data: me } = useMe();
   const [search, setSearch] = useState("");
 
@@ -21,10 +22,7 @@ export default function Timezones({
     user: { timezone },
   } = me!;
 
-  const onPressItem = useCallback(
-    (value: string) => () => console.log(value),
-    []
-  );
+  const onPressItem = useCallback((value: string) => () => onSubmit(value), []);
 
   const renderItem = useCallback(
     ({ item: { timeZone } }) => {
@@ -59,6 +57,7 @@ export default function Timezones({
         onIconPress={navigation.goBack}
         theme={{ roundness: 0 }}
       />
+      {submitting && <ProgressBar indeterminate />}
       <FlatList
         data={data?.filter((item) =>
           item.timeZone.toLocaleLowerCase().includes(search.toLocaleLowerCase())
