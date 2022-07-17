@@ -1,18 +1,32 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Divider, List, ProgressBar, Text } from "react-native-paper";
+import {
+  Divider,
+  List,
+  ProgressBar,
+  Text,
+  Banner,
+  Snackbar,
+} from "react-native-paper";
 import UserAvatar from "~components/UserAvatar";
 import useLogout from "~hooks/api/useLogout";
 import useMe from "~hooks/api/useMe";
+import useRequestEmailVerification from "~hooks/api/useRequestEmailVerification";
 
 export default function Account() {
   const { t } = useTranslation();
   const { data } = useMe();
   const { loading, logout } = useLogout();
+  const {
+    loading: sendVerificationLoading,
+    data: sendVerificationData,
+    onSubmit: sendVerificationLink,
+    reset,
+  } = useRequestEmailVerification();
 
   const {
-    user: { socialAvatarURL, avatar, fullName, email },
+    user: { socialAvatarURL, avatar, fullName, email, emailVerified },
   } = data!;
 
   const items = useMemo(
@@ -51,6 +65,18 @@ export default function Account() {
 
   return (
     <ScrollView contentContainerStyle={styles.contentContainer}>
+      <Banner
+        visible={!emailVerified}
+        actions={[
+          {
+            label: t("Send me a verification link"),
+            loading: sendVerificationLoading,
+            onPress: () => sendVerificationLink(email),
+          },
+        ]}
+      >
+        {t("Verify your email address to secure your account.")}
+      </Banner>
       {loading && <ProgressBar indeterminate />}
       <View style={styles.avatar}>
         <UserAvatar
@@ -68,6 +94,14 @@ export default function Account() {
           <Divider />
         </>
       ))}
+      <Snackbar
+        visible={!!sendVerificationData}
+        onDismiss={reset}
+        action={{ label: t("Dismiss"), onPress: reset }}
+        duration={Snackbar.DURATION_LONG}
+      >
+        {sendVerificationData?.message}
+      </Snackbar>
     </ScrollView>
   );
 }
