@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
-import { Divider, List, ProgressBar } from "react-native-paper";
+import { Divider, List, ProgressBar, Text } from "react-native-paper";
 import UserAvatar from "~components/UserAvatar";
 import useLogout from "~hooks/api/useLogout";
 import useMe from "~hooks/api/useMe";
@@ -12,18 +12,26 @@ export default function Account() {
   const { loading, logout } = useLogout();
 
   const {
-    user: { socialAvatarURL, avatar, fullName },
+    user: { socialAvatarURL, avatar, fullName, email },
   } = data!;
 
   const items = useMemo(
     () => [
       {
+        key: "avatar",
+        title: t("Change Profile Picture"),
+      },
+      {
+        key: "name",
+        title: t("Change Name"),
+      },
+      {
         key: "delete",
-        title: t("Delete account"),
+        title: t("Delete Account"),
       },
       {
         key: "logout",
-        title: t("Log out"),
+        title: t("Log Out"),
       },
     ],
     []
@@ -50,6 +58,8 @@ export default function Account() {
           src={avatar?.url || socialAvatarURL}
           size={80}
         />
+        <Text variant="headlineLarge">{fullName}</Text>
+        <Text>{email}</Text>
       </View>
       <Divider />
       {items.map(({ key, title }) => (

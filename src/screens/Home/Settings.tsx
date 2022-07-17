@@ -55,7 +55,7 @@ export default function Settings({
       },
       {
         key: "contact",
-        title: t("Contact us"),
+        title: t("Contact Us"),
         description: t("Have a suggestion or problem? Send us an email"),
         icon: "email-outline",
       },
