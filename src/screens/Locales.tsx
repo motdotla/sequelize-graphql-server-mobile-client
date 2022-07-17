@@ -53,14 +53,16 @@ export default function Locales({
       <Searchbar
         autoFocus
         value={search}
-        placeholder={t("Search")}
+        placeholder={t("Locale")}
         onChangeText={setSearch}
         icon="arrow-left"
         onIconPress={navigation.goBack}
         theme={{ roundness: 0 }}
       />
       <FlatList
-        data={data}
+        data={data?.filter((item) =>
+          item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )}
         initialNumToRender={10}
         keyboardShouldPersistTaps="always"
         keyExtractor={keyExtractor}

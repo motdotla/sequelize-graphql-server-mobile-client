@@ -54,13 +54,15 @@ export default function Timezones({
         autoFocus
         value={search}
         onChangeText={setSearch}
-        placeholder={t("Search")}
+        placeholder={t("Timezone")}
         icon="arrow-left"
         onIconPress={navigation.goBack}
         theme={{ roundness: 0 }}
       />
       <FlatList
-        data={data}
+        data={data?.filter((item) =>
+          item.timeZone.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+        )}
         initialNumToRender={10}
         keyboardShouldPersistTaps="always"
         keyExtractor={keyExtractor}
