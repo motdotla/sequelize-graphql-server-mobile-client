@@ -16,30 +16,39 @@ const DarkTheme = deepmerge(NavigationDarkTheme, PaperDarkTheme);
 const typescale: MD3Typescale = deepmerge(LightTheme.typescale, {
   displayLarge: {
     fontFamily: "Montserrat_900Black",
+    fontWeight: "bold",
   },
   displayMedium: {
     fontFamily: "Montserrat_800ExtraBold",
+    fontWeight: "bold",
   },
   displaySmall: {
     fontFamily: "Montserrat_700Bold",
+    fontWeight: "bold",
   },
   headlineLarge: {
     fontFamily: "Montserrat_900Black",
+    fontWeight: "bold",
   },
   headlineMedium: {
     fontFamily: "Montserrat_800ExtraBold",
+    fontWeight: "bold",
   },
   headlineSmall: {
     fontFamily: "Montserrat_700Bold",
+    fontWeight: "bold",
   },
   titleLarge: {
     fontFamily: "Montserrat_900Black",
+    fontWeight: "bold",
   },
   titleMedium: {
     fontFamily: "Montserrat_800ExtraBold",
+    fontWeight: "bold",
   },
   titleSmall: {
     fontFamily: "Montserrat_700Bold",
+    fontWeight: "bold",
   },
   bodyLarge: {
     fontFamily: "Montserrat_600SemiBold",

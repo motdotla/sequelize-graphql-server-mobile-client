@@ -2,6 +2,7 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import { useTranslation } from "react-i18next";
 import { ProgressBar } from "react-native-paper";
 import { HomeTabParamList, IconName } from "types";
+import ErrorState from "~components/ErrorState";
 import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
 import useMe from "~hooks/api/useMe";
 import Schedule from "./Schedule";
@@ -11,10 +12,18 @@ const Tab = createMaterialBottomTabNavigator<HomeTabParamList>();
 
 export default function Home() {
   const { t } = useTranslation();
-  const { loading } = useMe();
+  const { loading, data, error, onRefresh } = useMe();
 
   if (loading) {
     return <ProgressBar indeterminate />;
+  }
+
+  if (error) {
+    return <ErrorState message={error.message} onRetry={onRefresh} />;
+  }
+
+  if (data && !data.success) {
+    return <ErrorState message={data.message} onRetry={onRefresh} />;
   }
 
   return (
