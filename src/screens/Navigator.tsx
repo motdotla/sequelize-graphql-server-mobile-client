@@ -14,6 +14,9 @@ import Register from "./auth/Register";
 import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
 import Account from "./Account";
+import Notifications from "./Notifications";
+import Timezones from "./Timezones";
+import Locales from "./Locales";
 
 function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
   return (
@@ -88,7 +91,34 @@ export default function Navigator() {
                 headerShown: false,
               }}
             />
-            <Stack.Screen name="Account" component={Account} />
+            <Stack.Screen
+              name="Account"
+              component={Account}
+              options={{
+                title: t("Account"),
+              }}
+            />
+            <Stack.Screen
+              name="Notifications"
+              component={Notifications}
+              options={{
+                title: t("Notifications"),
+              }}
+            />
+            <Stack.Screen
+              name="Timezones"
+              component={Timezones}
+              options={{
+                title: t("Timezones"),
+              }}
+            />
+            <Stack.Screen
+              name="Locales"
+              component={Locales}
+              options={{
+                title: t("Locales"),
+              }}
+            />
           </Stack.Group>
         )}
       </Stack.Navigator>

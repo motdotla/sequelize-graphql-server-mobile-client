@@ -30,6 +30,7 @@ export default function ThemePicker({ visible, onDismiss }: Props) {
           <RadioButton.Group value={theme!} onValueChange={onValueChange}>
             {options.map((key) => (
               <RadioButton.Item
+                key={key}
                 label={t(key as string)}
                 value={key as string}
               />

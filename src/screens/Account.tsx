@@ -89,10 +89,10 @@ export default function Account() {
       </View>
       <Divider />
       {items.map(({ key, title }) => (
-        <>
-          <List.Item key={key} title={title} onPress={onPressItem(key)} />
+        <View key={key}>
+          <List.Item title={title} onPress={onPressItem(key)} />
           <Divider />
-        </>
+        </View>
       ))}
       <Snackbar
         visible={!!sendVerificationData}

@@ -30,6 +30,9 @@ export type RootStackParamList = {
   };
   Home: NavigatorScreenParams<HomeTabParamList>;
   Account: undefined;
+  Notifications: undefined;
+  Locales: undefined;
+  Timezones: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

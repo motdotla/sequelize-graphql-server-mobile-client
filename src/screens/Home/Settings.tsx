@@ -15,7 +15,7 @@ export default function Settings({
   const [openThemePicker, setOpenThemePicker] = useState(false);
 
   const toggleThemePicker = useCallback(
-    () => setOpenThemePicker((state) => !state),
+    () => setOpenThemePicker((open) => !open),
     []
   );
 
@@ -80,6 +80,18 @@ export default function Settings({
         }
         case "theme": {
           toggleThemePicker();
+          break;
+        }
+        case "locale": {
+          navigation.navigate("Locales");
+          break;
+        }
+        case "timezone": {
+          navigation.navigate("Timezones");
+          break;
+        }
+        case "notifications": {
+          navigation.navigate("Notifications");
           break;
         }
       }
