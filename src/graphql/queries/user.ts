@@ -116,3 +116,21 @@ export const ME = gql`
     }
   }
 `;
+
+export const GET_LOCALES = gql`
+  query GetLocales {
+    getLocales {
+      code
+      name
+    }
+  }
+`;
+
+export const GET_TIMEZONES = gql`
+  query GetTimeZones {
+    getTimeZones {
+      timeZone
+      offset
+    }
+  }
+`;

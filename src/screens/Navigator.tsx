@@ -109,6 +109,7 @@ export default function Navigator() {
               name="Timezones"
               component={Timezones}
               options={{
+                headerShown: false,
                 title: t("Timezones"),
               }}
             />
@@ -116,6 +117,7 @@ export default function Navigator() {
               name="Locales"
               component={Locales}
               options={{
+                headerShown: false,
                 title: t("Locales"),
               }}
             />

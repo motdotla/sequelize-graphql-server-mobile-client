@@ -149,3 +149,13 @@ type User = {
 export interface UserPayload extends Response {
   user: User;
 }
+
+export type Locale = {
+  code: string;
+  name: string;
+};
+
+export type Timezone = {
+  timeZone: string;
+  offset: string;
+};

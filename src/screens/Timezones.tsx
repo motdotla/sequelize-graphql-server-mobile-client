@@ -1,20 +1,77 @@
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet } from "react-native";
-import { Text } from "react-native-paper";
+import { View, StyleSheet, FlatList } from "react-native";
+import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
+import { RootStackScreenProps, Timezone } from "types";
+import ErrorState from "~components/ErrorState";
+import useGetTimezones from "~hooks/api/useGetTimezones";
+import useMe from "~hooks/api/useMe";
 
-export default function Timezones() {
+const keyExtractor = (item: Timezone) => item.timeZone;
+
+export default function Timezones({
+  navigation,
+}: RootStackScreenProps<"Timezones">) {
   const { t } = useTranslation();
+  const { loading, data, error, onRefresh } = useGetTimezones();
+  const { data: me } = useMe();
+  const [search, setSearch] = useState("");
+
+  const {
+    user: { timezone },
+  } = me!;
+
+  const onPressItem = useCallback(
+    (value: string) => () => console.log(value),
+    []
+  );
+
+  const renderItem = useCallback(
+    ({ item: { timeZone } }) => {
+      return (
+        <RadioButton.Item
+          label={timeZone}
+          value={timeZone}
+          status={timeZone === timezone ? "checked" : "unchecked"}
+          onPress={onPressItem(timeZone)}
+        />
+      );
+    },
+    [timezone]
+  );
+
+  if (loading) {
+    return <ProgressBar indeterminate />;
+  }
+
+  if (error) {
+    return <ErrorState message={error.message} onRetry={onRefresh} />;
+  }
 
   return (
-    <ScrollView contentContainerStyle={styles.contentContainer}>
-      <Text>{t("Timezone settings")}</Text>
-    </ScrollView>
+    <View style={styles.container}>
+      <Searchbar
+        autoFocus
+        value={search}
+        onChangeText={setSearch}
+        placeholder={t("Search")}
+        icon="arrow-left"
+        onIconPress={navigation.goBack}
+        theme={{ roundness: 0 }}
+      />
+      <FlatList
+        data={data}
+        initialNumToRender={10}
+        keyboardShouldPersistTaps="always"
+        keyExtractor={keyExtractor}
+        renderItem={renderItem}
+      />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  contentContainer: {
-    flexGrow: 1,
-    padding: 16,
+  container: {
+    flex: 1,
   },
 });
