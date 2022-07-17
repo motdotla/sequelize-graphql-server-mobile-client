@@ -2,9 +2,10 @@ import { useMemo } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, Button, HelperText } from "react-native-paper";
+import { TextInput, HelperText } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Button from "~components/Button";
 import * as yup from "yup";
 import { ForgotPasswordInput } from "types";
 
@@ -17,8 +18,8 @@ export default function ForgotPassword() {
         .object({
           email: yup
             .string()
-            .email(t("Invalid email address"))
-            .required(t("Type your email")),
+            .email(t("That email is incorrect"))
+            .required(t("What's your email address?")),
         })
         .required(),
     [t]
@@ -55,11 +56,12 @@ export default function ForgotPassword() {
               keyboardType="email-address"
               error={touchedFields.email && !!errors.email}
             />
-            {touchedFields.email && !!errors.email && (
-              <HelperText visible type="error">
-                {errors.email?.message}
-              </HelperText>
-            )}
+            <HelperText
+              visible={touchedFields.email && !!errors.email}
+              type="error"
+            >
+              {errors.email?.message}
+            </HelperText>
           </View>
         )}
       />

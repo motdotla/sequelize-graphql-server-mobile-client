@@ -2,11 +2,12 @@ import { useMemo, useRef } from "react";
 import { StyleSheet, View, TextInput as RTextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, Button, HelperText } from "react-native-paper";
+import { TextInput, HelperText } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import * as Localization from "expo-localization";
+import Button from "~components/Button";
 import { RegisterInput } from "types";
 
 export default function Register() {
@@ -21,16 +22,16 @@ export default function Register() {
         .object({
           firstName: yup
             .string()
-            .required(t("Type your first name"))
-            .min(1, t("Too short")),
+            .required(t("What's your first name?"))
+            .min(1, t("Your name is too short")),
           lastName: yup
             .string()
-            .required(t("Type your last name"))
-            .min(1, t("Too short")),
+            .required(t("What's your last name?"))
+            .min(1, t("Your name is too short")),
           email: yup
             .string()
-            .email(t("Invalid email address"))
-            .required(t("Type your email")),
+            .email(t("That email is incorrect"))
+            .required(t("What's your email address?")),
           password: yup
             .string()
             .required(t("Type your password"))
@@ -68,23 +69,24 @@ export default function Register() {
           render={({ field: { onBlur, onChange, value } }) => (
             <View style={styles.gap}>
               <TextInput
-                dense
                 autoFocus
                 value={value}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 blurOnSubmit={false}
                 onSubmitEditing={() => lastNameInputRef.current?.focus()}
+                autoCapitalize="words"
                 autoComplete="name-given"
                 label={t("First name")}
                 returnKeyType="next"
                 error={touchedFields.firstName && !!errors.firstName}
               />
-              {touchedFields.firstName && !!errors.firstName && (
-                <HelperText visible type="error">
-                  {errors.firstName.message}
-                </HelperText>
-              )}
+              <HelperText
+                visible={touchedFields.firstName && !!errors.firstName}
+                type="error"
+              >
+                {errors.firstName?.message}
+              </HelperText>
             </View>
           )}
         />
@@ -94,23 +96,24 @@ export default function Register() {
           render={({ field: { onBlur, onChange, value } }) => (
             <View style={styles.gap}>
               <TextInput
-                dense
                 value={value}
                 onBlur={onBlur}
                 onChangeText={onChange}
                 ref={lastNameInputRef}
                 blurOnSubmit={false}
                 onSubmitEditing={() => emailInputRef.current?.focus()}
+                autoCapitalize="words"
                 autoComplete="name-family"
                 label={t("Last name")}
                 returnKeyType="next"
                 error={touchedFields.lastName && !!errors.lastName}
               />
-              {touchedFields.lastName && !!errors.lastName && (
-                <HelperText visible type="error">
-                  {errors.lastName.message}
-                </HelperText>
-              )}
+              <HelperText
+                visible={touchedFields.lastName && !!errors.lastName}
+                type="error"
+              >
+                {errors.lastName?.message}
+              </HelperText>
             </View>
           )}
         />
@@ -120,7 +123,6 @@ export default function Register() {
           render={({ field: { onBlur, onChange, value } }) => (
             <View style={styles.gap}>
               <TextInput
-                dense
                 value={value}
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -133,11 +135,12 @@ export default function Register() {
                 keyboardType="email-address"
                 error={touchedFields.email && !!errors.email}
               />
-              {touchedFields.email && !!errors.email && (
-                <HelperText visible type="error">
-                  {errors.email.message}
-                </HelperText>
-              )}
+              <HelperText
+                visible={touchedFields.email && !!errors.email}
+                type="error"
+              >
+                {errors.email?.message}
+              </HelperText>
             </View>
           )}
         />
@@ -147,7 +150,6 @@ export default function Register() {
           render={({ field: { onBlur, onChange, value } }) => (
             <View style={styles.gap}>
               <TextInput
-                dense
                 value={value}
                 onBlur={onBlur}
                 onChangeText={onChange}
@@ -157,11 +159,12 @@ export default function Register() {
                 autoComplete="password-new"
                 error={touchedFields.password && !!errors.password}
               />
-              {touchedFields.password && !!errors.password && (
-                <HelperText visible type="error">
-                  {errors.password.message}
-                </HelperText>
-              )}
+              <HelperText
+                visible={touchedFields.password && !!errors.password}
+                type="error"
+              >
+                {errors.password?.message}
+              </HelperText>
             </View>
           )}
         />
@@ -185,6 +188,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   gap: {
-    marginBottom: 8,
+    marginBottom: 4,
   },
 });

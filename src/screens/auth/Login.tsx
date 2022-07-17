@@ -2,18 +2,19 @@ import { useMemo, useRef } from "react";
 import { StyleSheet, View, TextInput as RTextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, Button, HelperText } from "react-native-paper";
+import { TextInput, HelperText, Snackbar } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { LoginInput, RootStackScreenProps } from "types";
 import useLoginWithEmail from "~hooks/api/useLoginWithEmail";
+import Button from "~components/Button";
 import GoogleLogin from "./GoogleLogin";
 
 export default function Login({ navigation }: RootStackScreenProps<"Login">) {
   const { t } = useTranslation();
   const passwordInputRef = useRef<RTextInput>(null);
-  const { onSubmit, loading } = useLoginWithEmail();
+  const { onSubmit, loading, data, reset } = useLoginWithEmail();
 
   const schema = useMemo(
     () =>
@@ -21,9 +22,9 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
         .object({
           email: yup
             .string()
-            .email(t("Invalid email address"))
-            .required(t("Type your email")),
-          password: yup.string().required(t("Type your password")),
+            .email(t("That email is incorrect"))
+            .required(t("What's your email address?")),
+          password: yup.string().required(t("What's your password?")),
         })
         .required(),
     [t]
@@ -64,11 +65,12 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
                 keyboardType="email-address"
                 error={touchedFields.email && !!errors.email}
               />
-              {touchedFields.email && !!errors.email && (
-                <HelperText visible type="error">
-                  {errors.email?.message}
-                </HelperText>
-              )}
+              <HelperText
+                visible={touchedFields.email && !!errors.email}
+                type="error"
+              >
+                {errors.email?.message}
+              </HelperText>
             </View>
           )}
         />
@@ -112,13 +114,20 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
         {t("Login")}
       </Button>
       <Button
-        mode="outlined"
+        mode="contained-tonal"
         onPress={() => navigation.navigate("Register")}
         style={styles.gap}
       >
         {t("Don't have an account?")}
       </Button>
       <GoogleLogin />
+      <Snackbar
+        onDismiss={reset}
+        visible={!!data && !data.success}
+        wrapperStyle={{ alignSelf: "center" }}
+      >
+        {data?.message}
+      </Snackbar>
     </ScrollView>
   );
 }

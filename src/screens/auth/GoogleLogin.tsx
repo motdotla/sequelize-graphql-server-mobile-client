@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Button } from "react-native-paper";
+import Button from "~components/Button";
 
 export default function GoogleLogin() {
   const { t } = useTranslation();

@@ -2,10 +2,11 @@ import { useMemo, useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, Button, HelperText } from "react-native-paper";
+import { TextInput, HelperText } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Button from "~components/Button";
 import { ResetPasswordInput } from "types";
 
 export default function ResetPassword() {
@@ -71,7 +72,7 @@ export default function ResetPassword() {
         )}
       />
       <Button mode="contained" onPress={handleSubmit(console.log)}>
-        {t("Continue")}
+        {t("Change my password")}
       </Button>
     </ScrollView>
   );
