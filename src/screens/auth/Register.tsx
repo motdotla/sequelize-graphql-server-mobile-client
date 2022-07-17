@@ -66,7 +66,7 @@ export default function Register() {
         name="firstName"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
-          <View>
+          <View style={styles.gap}>
             <TextInput
               autoFocus
               value={value}
@@ -80,12 +80,14 @@ export default function Register() {
               returnKeyType="next"
               error={touchedFields.firstName && !!errors.firstName}
             />
-            <HelperText
-              visible={touchedFields.firstName && !!errors.firstName}
-              type="error"
-            >
-              {errors.firstName?.message}
-            </HelperText>
+            {touchedFields.firstName && !!errors.firstName && (
+              <HelperText
+                visible={touchedFields.firstName && !!errors.firstName}
+                type="error"
+              >
+                {errors.firstName?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />
@@ -93,7 +95,7 @@ export default function Register() {
         name="lastName"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
-          <View>
+          <View style={styles.gap}>
             <TextInput
               value={value}
               onBlur={onBlur}
@@ -107,12 +109,14 @@ export default function Register() {
               returnKeyType="next"
               error={touchedFields.lastName && !!errors.lastName}
             />
-            <HelperText
-              visible={touchedFields.lastName && !!errors.lastName}
-              type="error"
-            >
-              {errors.lastName?.message}
-            </HelperText>
+            {touchedFields.lastName && !!errors.lastName && (
+              <HelperText
+                visible={touchedFields.lastName && !!errors.lastName}
+                type="error"
+              >
+                {errors.lastName?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />
@@ -120,7 +124,7 @@ export default function Register() {
         name="email"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
-          <View>
+          <View style={styles.gap}>
             <TextInput
               value={value}
               onBlur={onBlur}
@@ -134,12 +138,14 @@ export default function Register() {
               keyboardType="email-address"
               error={touchedFields.email && !!errors.email}
             />
-            <HelperText
-              visible={touchedFields.email && !!errors.email}
-              type="error"
-            >
-              {errors.email?.message}
-            </HelperText>
+            {touchedFields.email && !!errors.email && (
+              <HelperText
+                visible={touchedFields.email && !!errors.email}
+                type="error"
+              >
+                {errors.email?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />
@@ -147,7 +153,7 @@ export default function Register() {
         name="password"
         control={control}
         render={({ field: { onBlur, onChange, value } }) => (
-          <View>
+          <View style={styles.gap}>
             <TextInput
               value={value}
               onBlur={onBlur}
@@ -158,12 +164,14 @@ export default function Register() {
               autoComplete="password-new"
               error={touchedFields.password && !!errors.password}
             />
-            <HelperText
-              visible={touchedFields.password && !!errors.password}
-              type="error"
-            >
-              {errors.password?.message}
-            </HelperText>
+            {touchedFields.password && !!errors.password && (
+              <HelperText
+                visible={touchedFields.password && !!errors.password}
+                type="error"
+              >
+                {errors.password?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />
@@ -180,5 +188,8 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 48,
     justifyContent: "flex-end",
+  },
+  gap: {
+    marginBottom: 8,
   },
 });

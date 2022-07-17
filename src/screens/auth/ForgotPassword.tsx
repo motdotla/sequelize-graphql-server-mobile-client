@@ -56,12 +56,14 @@ export default function ForgotPassword() {
               keyboardType="email-address"
               error={touchedFields.email && !!errors.email}
             />
-            <HelperText
-              visible={touchedFields.email && !!errors.email}
-              type="error"
-            >
-              {errors.email?.message}
-            </HelperText>
+            {touchedFields.email && !!errors.email && (
+              <HelperText
+                visible={touchedFields.email && !!errors.email}
+                type="error"
+              >
+                {errors.email?.message}
+              </HelperText>
+            )}
           </View>
         )}
       />

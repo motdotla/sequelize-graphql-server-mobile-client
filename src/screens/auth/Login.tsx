@@ -47,74 +47,81 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
       keyboardShouldPersistTaps="always"
       contentContainerStyle={styles.contentContainer}
     >
-      <Controller
-        name="email"
-        control={control}
-        render={({ field: { onBlur, onChange, value } }) => (
-          <View>
-            <TextInput
-              value={value}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              blurOnSubmit={false}
-              onSubmitEditing={() => passwordInputRef.current?.focus()}
-              autoComplete="email"
-              label={t("Email")}
-              returnKeyType="next"
-              keyboardType="email-address"
-              error={touchedFields.email && !!errors.email}
-            />
-            <HelperText
-              visible={touchedFields.email && !!errors.email}
-              type="error"
-            >
-              {errors.email?.message}
-            </HelperText>
-          </View>
-        )}
-      />
-      <Controller
-        name="password"
-        control={control}
-        render={({ field: { onBlur, onChange, value } }) => (
-          <View>
-            <TextInput
-              value={value}
-              onBlur={onBlur}
-              onChangeText={onChange}
-              secureTextEntry
-              ref={passwordInputRef}
-              label={t("Password")}
-              autoComplete="password"
-              error={touchedFields.password && !!errors.password}
-            />
-            {touchedFields.password && !!errors.password && (
-              <HelperText type="error" visible>
-                {errors.password?.message}
-              </HelperText>
-            )}
-          </View>
-        )}
-      />
-      <Button
-        onPress={() => navigation.navigate("ForgotPassword")}
-        style={styles.buttonGap}
-      >
-        {t("Forgot your password?")}
-      </Button>
-      <Button
-        loading={loading}
-        disabled={loading}
-        mode="contained"
-        onPress={handleSubmit(onSubmit)}
-        style={styles.buttonGap}
-      >
-        {t("Login")}
-      </Button>
+      <View style={styles.form}>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <View style={styles.gap}>
+              <TextInput
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                blurOnSubmit={false}
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
+                autoComplete="email"
+                label={t("Email")}
+                returnKeyType="next"
+                keyboardType="email-address"
+                error={touchedFields.email && !!errors.email}
+              />
+              {touchedFields.email && !!errors.email && (
+                <HelperText
+                  visible={touchedFields.email && !!errors.email}
+                  type="error"
+                >
+                  {errors.email?.message}
+                </HelperText>
+              )}
+            </View>
+          )}
+        />
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { onBlur, onChange, value } }) => (
+            <View style={styles.gap}>
+              <TextInput
+                value={value}
+                onBlur={onBlur}
+                onChangeText={onChange}
+                secureTextEntry
+                ref={passwordInputRef}
+                label={t("Password")}
+                autoComplete="password"
+                error={touchedFields.password && !!errors.password}
+              />
+              {touchedFields.password && !!errors.password && (
+                <HelperText
+                  type="error"
+                  visible={touchedFields.password && !!errors.password}
+                >
+                  {errors.password?.message}
+                </HelperText>
+              )}
+            </View>
+          )}
+        />
+        <Button
+          style={styles.gap}
+          onPress={() => navigation.navigate("ForgotPassword")}
+        >
+          {t("Forgot your password?")}
+        </Button>
+        <Button
+          loading={loading}
+          disabled={loading}
+          mode="contained"
+          onPress={handleSubmit(onSubmit)}
+          style={styles.gap}
+        >
+          {t("Login")}
+        </Button>
+      </View>
       <Button
         mode="contained-tonal"
         onPress={() => navigation.navigate("Register")}
-        style={styles.buttonGap}
+        style={styles.gap}
       >
         {t("Don't have an account?")}
       </Button>
@@ -138,9 +145,9 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
   },
   gap: {
-    marginBottom: 4,
-  },
-  buttonGap: {
     marginBottom: 8,
+  },
+  form: {
+    marginBottom: 16,
   },
 });
