@@ -1,5 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useCallback } from "react";
+import Toast from "react-native-root-toast";
 import { AuthFormMutationResponse, AuthState, RegisterInput } from "types";
 import { AUTH_STATE } from "~graphql/queries/app";
 import { REGISTER_WITH_EMAIL } from "~graphql/queries/auth";
@@ -8,7 +9,11 @@ export default function useRegisterWithEmail() {
   const [mutate, { loading, data, error, reset }] = useMutation<
     { registerWithEmail: AuthFormMutationResponse },
     { input: RegisterInput }
-  >(REGISTER_WITH_EMAIL);
+  >(REGISTER_WITH_EMAIL, {
+    onCompleted: ({ registerWithEmail }) => {
+      Toast.show(registerWithEmail.message);
+    },
+  });
 
   const onSubmit = useCallback(
     (input: RegisterInput) =>

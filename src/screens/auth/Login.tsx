@@ -2,7 +2,7 @@ import { useMemo, useRef } from "react";
 import { StyleSheet, View, TextInput as RTextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
-import { TextInput, HelperText, Snackbar } from "react-native-paper";
+import { TextInput, HelperText } from "react-native-paper";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -14,7 +14,7 @@ import GoogleLogin from "./GoogleLogin";
 export default function Login({ navigation }: RootStackScreenProps<"Login">) {
   const { t } = useTranslation();
   const passwordInputRef = useRef<RTextInput>(null);
-  const { onSubmit, loading, data, reset } = useLoginWithEmail();
+  const { onSubmit, loading } = useLoginWithEmail();
 
   const schema = useMemo(
     () =>
@@ -126,13 +126,6 @@ export default function Login({ navigation }: RootStackScreenProps<"Login">) {
         {t("Don't have an account?")}
       </Button>
       <GoogleLogin />
-      <Snackbar
-        onDismiss={reset}
-        visible={!!data && !data.success}
-        wrapperStyle={{ alignSelf: "center" }}
-      >
-        {data?.message}
-      </Snackbar>
     </ScrollView>
   );
 }

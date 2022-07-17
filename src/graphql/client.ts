@@ -1,7 +1,9 @@
 import { ApolloClient, ApolloLink, HttpLink, from } from "@apollo/client";
+import { onError } from "@apollo/client/link/error";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AsyncStorageWrapper, CachePersistor } from "apollo3-cache-persist";
 import Constants from "expo-constants";
+import Toast from "react-native-root-toast";
 import { AuthState } from "types";
 import cache from "./cache";
 import { AUTH_STATE } from "./queries/app";
@@ -31,11 +33,17 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
+const errorLink = onError(({ networkError }) => {
+  if (networkError) {
+    Toast.show(networkError.message);
+  }
+});
+
 const client = new ApolloClient({
   name: Constants.manifest?.name,
   version: Constants.manifest?.version,
   cache,
-  link: from([authLink, httpLink]),
+  link: from([errorLink, authLink, httpLink]),
 });
 
 export default client;
