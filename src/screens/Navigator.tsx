@@ -12,6 +12,7 @@ import Login from "./auth/Login";
 import Register from "./auth/Register";
 import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
+import { useAuth } from "~hooks/app";
 
 function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
   return (
@@ -27,6 +28,8 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 export default function Navigator() {
   const { colors, dark } = useTheme();
   const { t } = useTranslation();
+  const { isLoggedIn } = useAuth();
+
   return (
     <View
       style={{
@@ -44,43 +47,46 @@ export default function Navigator() {
           header: (props) => <Header {...props} />,
         }}
       >
-        <Stack.Group>
+        {!isLoggedIn ? (
+          <Stack.Group>
+            <Stack.Screen
+              name="Login"
+              component={Login}
+              options={{
+                title: t("Login"),
+              }}
+            />
+            <Stack.Screen
+              name="Register"
+              component={Register}
+              options={{
+                title: t("Register"),
+              }}
+            />
+            <Stack.Screen
+              name="ForgotPassword"
+              component={ForgotPassword}
+              options={{
+                title: t("Forgot Password"),
+              }}
+            />
+            <Stack.Screen
+              name="ResetPassword"
+              component={ResetPassword}
+              options={{
+                title: t("Reset Password"),
+              }}
+            />
+          </Stack.Group>
+        ) : (
           <Stack.Screen
-            name="Login"
-            component={Login}
+            name="Home"
+            component={Home}
             options={{
-              title: t("Login"),
+              headerShown: false,
             }}
           />
-          <Stack.Screen
-            name="Register"
-            component={Register}
-            options={{
-              title: t("Register"),
-            }}
-          />
-          <Stack.Screen
-            name="ForgotPassword"
-            component={ForgotPassword}
-            options={{
-              title: t("Forgot Password"),
-            }}
-          />
-          <Stack.Screen
-            name="ResetPassword"
-            component={ResetPassword}
-            options={{
-              title: t("Reset Password"),
-            }}
-          />
-        </Stack.Group>
-        <Stack.Screen
-          name="Home"
-          component={Home}
-          options={{
-            headerShown: false,
-          }}
-        />
+        )}
       </Stack.Navigator>
     </View>
   );

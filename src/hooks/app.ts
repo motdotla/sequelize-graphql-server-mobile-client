@@ -8,7 +8,7 @@ export function usePreferences() {
     PREFERENCES
   );
 
-  const preferences = data?.preferences;
+  const preferences = data!.preferences;
 
   const setPreference = useCallback((key: keyof AppPreferences, value) => {
     client.writeQuery<{ preferences: AppPreferences }>({
