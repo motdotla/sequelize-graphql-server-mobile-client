@@ -62,118 +62,112 @@ export default function Register() {
       keyboardShouldPersistTaps="always"
       contentContainerStyle={styles.contentContainer}
     >
-      <View style={styles.gap}>
-        <Controller
-          name="firstName"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <View style={styles.gap}>
-              <TextInput
-                autoFocus
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                blurOnSubmit={false}
-                onSubmitEditing={() => lastNameInputRef.current?.focus()}
-                autoCapitalize="words"
-                autoComplete="name-given"
-                label={t("First name")}
-                returnKeyType="next"
-                error={touchedFields.firstName && !!errors.firstName}
-              />
-              <HelperText
-                visible={touchedFields.firstName && !!errors.firstName}
-                type="error"
-              >
-                {errors.firstName?.message}
-              </HelperText>
-            </View>
-          )}
-        />
-        <Controller
-          name="lastName"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <View style={styles.gap}>
-              <TextInput
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                ref={lastNameInputRef}
-                blurOnSubmit={false}
-                onSubmitEditing={() => emailInputRef.current?.focus()}
-                autoCapitalize="words"
-                autoComplete="name-family"
-                label={t("Last name")}
-                returnKeyType="next"
-                error={touchedFields.lastName && !!errors.lastName}
-              />
-              <HelperText
-                visible={touchedFields.lastName && !!errors.lastName}
-                type="error"
-              >
-                {errors.lastName?.message}
-              </HelperText>
-            </View>
-          )}
-        />
-        <Controller
-          name="email"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <View style={styles.gap}>
-              <TextInput
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                ref={emailInputRef}
-                blurOnSubmit={false}
-                onSubmitEditing={() => passwordInputRef.current?.focus()}
-                autoComplete="email"
-                label={t("Email")}
-                returnKeyType="next"
-                keyboardType="email-address"
-                error={touchedFields.email && !!errors.email}
-              />
-              <HelperText
-                visible={touchedFields.email && !!errors.email}
-                type="error"
-              >
-                {errors.email?.message}
-              </HelperText>
-            </View>
-          )}
-        />
-        <Controller
-          name="password"
-          control={control}
-          render={({ field: { onBlur, onChange, value } }) => (
-            <View style={styles.gap}>
-              <TextInput
-                value={value}
-                onBlur={onBlur}
-                onChangeText={onChange}
-                ref={passwordInputRef}
-                label={t("Password")}
-                secureTextEntry
-                autoComplete="password-new"
-                error={touchedFields.password && !!errors.password}
-              />
-              <HelperText
-                visible={touchedFields.password && !!errors.password}
-                type="error"
-              >
-                {errors.password?.message}
-              </HelperText>
-            </View>
-          )}
-        />
-      </View>
-      <Button
-        mode="contained"
-        onPress={handleSubmit(console.log)}
-        style={styles.gap}
-      >
+      <Controller
+        name="firstName"
+        control={control}
+        render={({ field: { onBlur, onChange, value } }) => (
+          <View>
+            <TextInput
+              autoFocus
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              blurOnSubmit={false}
+              onSubmitEditing={() => lastNameInputRef.current?.focus()}
+              autoCapitalize="words"
+              autoComplete="name-given"
+              label={t("First name")}
+              returnKeyType="next"
+              error={touchedFields.firstName && !!errors.firstName}
+            />
+            <HelperText
+              visible={touchedFields.firstName && !!errors.firstName}
+              type="error"
+            >
+              {errors.firstName?.message}
+            </HelperText>
+          </View>
+        )}
+      />
+      <Controller
+        name="lastName"
+        control={control}
+        render={({ field: { onBlur, onChange, value } }) => (
+          <View>
+            <TextInput
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              ref={lastNameInputRef}
+              blurOnSubmit={false}
+              onSubmitEditing={() => emailInputRef.current?.focus()}
+              autoCapitalize="words"
+              autoComplete="name-family"
+              label={t("Last name")}
+              returnKeyType="next"
+              error={touchedFields.lastName && !!errors.lastName}
+            />
+            <HelperText
+              visible={touchedFields.lastName && !!errors.lastName}
+              type="error"
+            >
+              {errors.lastName?.message}
+            </HelperText>
+          </View>
+        )}
+      />
+      <Controller
+        name="email"
+        control={control}
+        render={({ field: { onBlur, onChange, value } }) => (
+          <View>
+            <TextInput
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              ref={emailInputRef}
+              blurOnSubmit={false}
+              onSubmitEditing={() => passwordInputRef.current?.focus()}
+              autoComplete="email"
+              label={t("Email")}
+              returnKeyType="next"
+              keyboardType="email-address"
+              error={touchedFields.email && !!errors.email}
+            />
+            <HelperText
+              visible={touchedFields.email && !!errors.email}
+              type="error"
+            >
+              {errors.email?.message}
+            </HelperText>
+          </View>
+        )}
+      />
+      <Controller
+        name="password"
+        control={control}
+        render={({ field: { onBlur, onChange, value } }) => (
+          <View>
+            <TextInput
+              value={value}
+              onBlur={onBlur}
+              onChangeText={onChange}
+              ref={passwordInputRef}
+              label={t("Password")}
+              secureTextEntry
+              autoComplete="password-new"
+              error={touchedFields.password && !!errors.password}
+            />
+            <HelperText
+              visible={touchedFields.password && !!errors.password}
+              type="error"
+            >
+              {errors.password?.message}
+            </HelperText>
+          </View>
+        )}
+      />
+      <Button mode="contained" onPress={handleSubmit(console.log)}>
         {t("Create account")}
       </Button>
     </ScrollView>
@@ -186,8 +180,5 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 48,
     justifyContent: "flex-end",
-  },
-  gap: {
-    marginBottom: 4,
   },
 });

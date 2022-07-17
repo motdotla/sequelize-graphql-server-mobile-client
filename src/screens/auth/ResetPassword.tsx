@@ -46,7 +46,7 @@ export default function ResetPassword() {
         name="password"
         control={control}
         render={({ field: { value, onBlur, onChange } }) => (
-          <View style={styles.gap}>
+          <View>
             <TextInput
               autoFocus
               value={value}
@@ -63,11 +63,12 @@ export default function ResetPassword() {
               }
               error={touchedFields.password && !!errors.password}
             />
-            {touchedFields.password && !!errors.password && (
-              <HelperText visible type="error">
-                {errors.password.message}
-              </HelperText>
-            )}
+            <HelperText
+              visible={touchedFields.password && !!errors.password}
+              type="error"
+            >
+              {errors.password?.message}
+            </HelperText>
           </View>
         )}
       />
@@ -84,8 +85,5 @@ const styles = StyleSheet.create({
     padding: 16,
     paddingBottom: 48,
     justifyContent: "flex-end",
-  },
-  gap: {
-    marginBottom: 8,
   },
 });
