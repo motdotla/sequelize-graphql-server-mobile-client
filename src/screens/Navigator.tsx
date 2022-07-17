@@ -7,12 +7,13 @@ import { View, StatusBar } from "react-native";
 import { useTheme, Appbar } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { RootStackParamList } from "types";
+import { useAuth } from "~hooks/app";
 import Home from "./Home";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
-import { useAuth } from "~hooks/app";
+import Account from "./Account";
 
 function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
   return (
@@ -79,13 +80,16 @@ export default function Navigator() {
             />
           </Stack.Group>
         ) : (
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{
-              headerShown: false,
-            }}
-          />
+          <Stack.Group>
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <Stack.Screen name="Account" component={Account} />
+          </Stack.Group>
         )}
       </Stack.Navigator>
     </View>

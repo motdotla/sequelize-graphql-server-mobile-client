@@ -29,6 +29,7 @@ export type RootStackParamList = {
     token: string;
   };
   Home: NavigatorScreenParams<HomeTabParamList>;
+  Account: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =

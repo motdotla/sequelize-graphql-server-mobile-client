@@ -5,9 +5,11 @@ import { Appbar, List, Text } from "react-native-paper";
 import Constants from "expo-constants";
 import useMe from "~hooks/api/useMe";
 import { usePreferences } from "~hooks/app";
-import useLogout from "~hooks/api/useLogout";
+import { HomeTabScreenProps } from "types";
 
-export default function Settings() {
+export default function Settings({
+  navigation,
+}: HomeTabScreenProps<"Settings">) {
   const { t } = useTranslation();
   const {
     preferences: { theme },
@@ -15,24 +17,28 @@ export default function Settings() {
 
   const { data } = useMe();
 
+  const { user } = data!;
+
   const items = useMemo(
     () => [
       {
         key: "account",
         title: t("Account"),
-        description: data?.user.fullName,
+        description: !user.emailVerified
+          ? t("Verify your email to prevent data loss")
+          : user.fullName,
         icon: "account-outline",
       },
       {
         key: "timezone",
         title: t("Timezone"),
-        description: data?.user.timezone,
+        description: user.timezone,
         icon: "earth",
       },
       {
         key: "locale",
         title: t("Locale"),
-        description: data?.user.locale,
+        description: user.locale,
         icon: "alphabetical-variant",
       },
       {
@@ -53,28 +59,20 @@ export default function Settings() {
         description: t("Have a suggestion or problem? Send us an email"),
         icon: "email-outline",
       },
-      {
-        key: "logout",
-        title: t("Log out"),
-        description: t("You'll no longer receive reminders"),
-        icon: "logout",
-      },
     ],
-    [t]
+    [t, user]
   );
-
-  const { logout } = useLogout();
 
   const onPressItem = useCallback(
     (key: string) => () => {
       switch (key) {
-        case "logout": {
-          logout();
+        case "account": {
+          navigation.navigate("Account");
           break;
         }
       }
     },
-    [logout]
+    []
   );
 
   return (
