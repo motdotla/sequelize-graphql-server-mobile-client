@@ -4117,6 +4117,13 @@ expo-localization@~13.0.0:
   dependencies:
     rtl-detect "^1.0.2"
 
+expo-mail-composer@~11.2.0:
+  version "11.2.0"
+  resolved "https://registry.yarnpkg.com/expo-mail-composer/-/expo-mail-composer-11.2.0.tgz#efa9b0158790136a5968ed6f55ef9fc40297ec97"
+  integrity sha512-LTBX9fTZvBlB7bqx+BsEdSFJ63QRsr6Owe1SqtYzBmJyKH4IT4NFsNRt4Bwgh1o5JT5j2LRFgI6wokGw27Sq/Q==
+  dependencies:
+    query-string "^6.2.0"
+
 expo-manifests@~0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/expo-manifests/-/expo-manifests-0.3.0.tgz#724e85a4e726cb1ef775f9846c9ecb8d243a17d7"
@@ -7081,6 +7088,16 @@ qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+
+query-string@^6.2.0:
+  version "6.14.1"
+  resolved "https://registry.yarnpkg.com/query-string/-/query-string-6.14.1.tgz#7ac2dca46da7f309449ba0f86b1fd28255b0c86a"
+  integrity sha512-XDxAeVmpfu1/6IjyT/gXHOl+S0vQ9owggJ30hhWKdHAsNPOcasn5o9BW0eejZqL2e4vMjhAxoW3jVHcD6mbcYw==
+  dependencies:
+    decode-uri-component "^0.2.0"
+    filter-obj "^1.1.0"
+    split-on-first "^1.0.0"
+    strict-uri-encode "^2.0.0"
 
 query-string@^7.0.0:
   version "7.1.1"

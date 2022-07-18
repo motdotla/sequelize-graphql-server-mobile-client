@@ -13,6 +13,7 @@ const {
   ENV,
   CLIENT_ID,
   BASE_URL,
+  CONTACT_EMAIL,
 } = process.env;
 
 const enableInExpoDevelopment = ENV === "development";
@@ -67,6 +68,7 @@ const config: ExpoConfig = {
     clientId: CLIENT_ID,
     graphqlEndpoint: `${BASE_URL}/graphql`,
     restEndpoint: `${BASE_URL}/v1`,
+    email: CONTACT_EMAIL,
   },
 };
 

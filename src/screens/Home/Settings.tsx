@@ -1,8 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { View, ScrollView, StyleSheet } from "react-native";
+import { View, ScrollView, StyleSheet, Platform } from "react-native";
 import { Appbar, List, Text } from "react-native-paper";
 import Constants from "expo-constants";
+import * as MailComposer from "expo-mail-composer";
 import useMe from "~hooks/api/useMe";
 import { usePreferences } from "~hooks/app";
 import { HomeTabScreenProps } from "types";
@@ -92,6 +93,13 @@ export default function Settings({
         }
         case "notifications": {
           navigation.navigate("Notifications");
+          break;
+        }
+        case "contact": {
+          MailComposer.composeAsync({
+            recipients: [Constants.manifest?.extra?.email],
+            subject: `[${Platform.OS}]`,
+          });
           break;
         }
       }
