@@ -86,6 +86,7 @@ export const REMOVE_AVATAR = gql`
           url
           thumbnail
         }
+        socialAvatarURL
       }
     }
   }
