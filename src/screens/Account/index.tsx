@@ -14,6 +14,7 @@ import useLogout from "~hooks/api/logout";
 import { useMe } from "~hooks/api/me";
 import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
+import ChangeFullname from "./components/ChangeFullname";
 
 export default function Account() {
   const { t } = useTranslation();
@@ -26,11 +27,13 @@ export default function Account() {
     reset,
   } = useRequestEmailVerification();
   const [openDelete, setOpenDelete] = useState(false);
+  const [openName, setOpenName] = useState(false);
 
   const toggleOpenDelete = useCallback(
     () => setOpenDelete((open) => !open),
     []
   );
+  const toggleOpenName = useCallback(() => setOpenName((open) => !open), []);
 
   const {
     user: { socialAvatarURL, avatar, fullName, email, emailVerified },
@@ -67,6 +70,10 @@ export default function Account() {
         }
         case "delete": {
           toggleOpenDelete();
+          break;
+        }
+        case "name": {
+          toggleOpenName();
           break;
         }
       }
@@ -114,6 +121,7 @@ export default function Account() {
         {sendVerificationData?.message}
       </Snackbar>
       <ConfirmDeleteAccount visible={openDelete} onDismiss={toggleOpenDelete} />
+      <ChangeFullname visible={openName} onDismiss={toggleOpenName} />
     </ScrollView>
   );
 }
