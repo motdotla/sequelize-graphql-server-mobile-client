@@ -35,7 +35,7 @@ export default function Settings({
         key: "account",
         title: t("Account"),
         description: !user.emailVerified
-          ? t("Verify your email to prevent data loss")
+          ? t("Verify your email to secure your account")
           : user.fullName,
         icon: "account-outline",
       },

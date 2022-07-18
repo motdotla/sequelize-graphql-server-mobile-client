@@ -15,6 +15,7 @@ import { useMe } from "~hooks/api/me";
 import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 import ChangeFullname from "./components/ChangeFullname";
+import ChangePhoto from "./components/ChangePhoto";
 
 export default function Account() {
   const { t } = useTranslation();
@@ -27,13 +28,21 @@ export default function Account() {
     reset,
   } = useRequestEmailVerification();
   const [openDelete, setOpenDelete] = useState(false);
-  const [openName, setOpenName] = useState(false);
+  const [openEditName, setOpenEditName] = useState(false);
+  const [openEditPhoto, setOpenEditPhoto] = useState(false);
 
   const toggleOpenDelete = useCallback(
     () => setOpenDelete((open) => !open),
     []
   );
-  const toggleOpenName = useCallback(() => setOpenName((open) => !open), []);
+  const toggleOpenEditName = useCallback(
+    () => setOpenEditName((open) => !open),
+    []
+  );
+  const toggleOpenEditPhoto = useCallback(
+    () => setOpenEditPhoto((open) => !open),
+    []
+  );
 
   const {
     user: { socialAvatarURL, avatar, fullName, email, emailVerified },
@@ -73,7 +82,11 @@ export default function Account() {
           break;
         }
         case "name": {
-          toggleOpenName();
+          toggleOpenEditName();
+          break;
+        }
+        case "avatar": {
+          toggleOpenEditPhoto();
           break;
         }
       }
@@ -121,7 +134,8 @@ export default function Account() {
         {sendVerificationData?.message}
       </Snackbar>
       <ConfirmDeleteAccount visible={openDelete} onDismiss={toggleOpenDelete} />
-      <ChangeFullname visible={openName} onDismiss={toggleOpenName} />
+      <ChangeFullname visible={openEditName} onDismiss={toggleOpenEditName} />
+      <ChangePhoto visible={openEditPhoto} onDismiss={toggleOpenEditPhoto} />
     </ScrollView>
   );
 }
