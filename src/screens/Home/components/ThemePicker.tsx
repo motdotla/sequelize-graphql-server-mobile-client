@@ -24,7 +24,7 @@ export default function ThemePicker({ visible, onDismiss }: Props) {
 
   return (
     <Portal>
-      <Dialog visible={visible} onDismiss={onDismiss} theme={{ roundness: 1 }}>
+      <Dialog visible={visible} onDismiss={onDismiss}>
         <Dialog.Title>{t("Theme")}</Dialog.Title>
         <Dialog.Content>
           <RadioButton.Group value={theme!} onValueChange={onValueChange}>

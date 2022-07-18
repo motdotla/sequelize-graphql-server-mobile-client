@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
@@ -13,6 +13,7 @@ import UserAvatar from "~components/UserAvatar";
 import useLogout from "~hooks/api/useLogout";
 import useMe from "~hooks/api/useMe";
 import useRequestEmailVerification from "~hooks/api/useRequestEmailVerification";
+import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 
 export default function Account() {
   const { t } = useTranslation();
@@ -24,6 +25,12 @@ export default function Account() {
     onSubmit: sendVerificationLink,
     reset,
   } = useRequestEmailVerification();
+  const [openDelete, setOpenDelete] = useState(false);
+
+  const toggleOpenDelete = useCallback(
+    () => setOpenDelete((open) => !open),
+    []
+  );
 
   const {
     user: { socialAvatarURL, avatar, fullName, email, emailVerified },
@@ -56,6 +63,10 @@ export default function Account() {
       switch (key) {
         case "logout": {
           logout();
+          break;
+        }
+        case "delete": {
+          toggleOpenDelete();
           break;
         }
       }
@@ -102,6 +113,7 @@ export default function Account() {
       >
         {sendVerificationData?.message}
       </Snackbar>
+      <ConfirmDeleteAccount visible={openDelete} onDismiss={toggleOpenDelete} />
     </ScrollView>
   );
 }
