@@ -1,8 +1,8 @@
+import { useEffect } from "react";
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
 import { useRequestDeleteAccount } from "~hooks/api/deleteAccount";
-import { useEffect } from "react";
 
 type Props = {
   visible: boolean;
