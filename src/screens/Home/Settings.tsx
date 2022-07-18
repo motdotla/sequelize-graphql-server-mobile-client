@@ -38,74 +38,49 @@ export default function Settings({
           ? t("Verify your email to secure your account")
           : user.fullName,
         icon: "account-outline",
+        onPress: () => navigation.navigate("Account"),
       },
       {
         key: "timezone",
         title: t("Timezone"),
         description: user.timezone,
         icon: "earth",
+        onPress: () => navigation.navigate("Timezones"),
       },
       {
         key: "locale",
         title: t("Locale"),
         description: user.locale,
         icon: "alphabetical-variant",
+        onPress: () => navigation.navigate("Locales"),
       },
       {
         key: "notifications",
         title: t("Notifications"),
         description: t("Reminders and Push Notifications"),
         icon: "bell-outline",
+        onPress: () => navigation.navigate("Notifications"),
       },
       {
         key: "theme",
         title: t("Theme"),
         description: capitalize(t(theme!)),
         icon: "theme-light-dark",
+        onPress: toggleThemePicker,
       },
       {
         key: "contact",
         title: t("Contact Us"),
         description: t("Have a suggestion or problem? Send us an email"),
         icon: "email-outline",
-      },
-    ],
-    [t, user, theme]
-  );
-
-  const onPressItem = useCallback(
-    (key: string) => () => {
-      switch (key) {
-        case "account": {
-          navigation.navigate("Account");
-          break;
-        }
-        case "theme": {
-          toggleThemePicker();
-          break;
-        }
-        case "locale": {
-          navigation.navigate("Locales");
-          break;
-        }
-        case "timezone": {
-          navigation.navigate("Timezones");
-          break;
-        }
-        case "notifications": {
-          navigation.navigate("Notifications");
-          break;
-        }
-        case "contact": {
+        onPress: () =>
           MailComposer.composeAsync({
             recipients: [Constants.manifest?.extra?.email],
             subject: `[${Platform.OS}]`,
-          });
-          break;
-        }
-      }
-    },
-    []
+          }),
+      },
+    ],
+    [t, user, theme]
   );
 
   return (
@@ -115,13 +90,13 @@ export default function Settings({
       </Appbar>
       <ScrollView contentContainerStyle={styles.contentContainer}>
         <View style={styles.container}>
-          {items.map(({ key, title, description, icon }) => (
+          {items.map(({ key, title, description, icon, onPress }) => (
             <List.Item
               key={key}
               title={title}
               left={() => <List.Icon icon={icon} />}
               description={description}
-              onPress={onPressItem(key)}
+              onPress={onPress}
             />
           ))}
         </View>

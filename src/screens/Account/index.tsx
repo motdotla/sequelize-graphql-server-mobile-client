@@ -53,45 +53,25 @@ export default function Account() {
       {
         key: "avatar",
         title: t("Change Profile Picture"),
+        onPress: toggleOpenEditPhoto,
       },
       {
         key: "name",
         title: t("Change Name"),
+        onPress: toggleOpenEditName,
       },
       {
         key: "delete",
         title: t("Delete Account"),
+        onPress: toggleOpenDelete,
       },
       {
         key: "logout",
         title: t("Log Out"),
+        onPress: logout,
       },
     ],
     [t]
-  );
-
-  const onPressItem = useCallback(
-    (key: string) => () => {
-      switch (key) {
-        case "logout": {
-          logout();
-          break;
-        }
-        case "delete": {
-          toggleOpenDelete();
-          break;
-        }
-        case "name": {
-          toggleOpenEditName();
-          break;
-        }
-        case "avatar": {
-          toggleOpenEditPhoto();
-          break;
-        }
-      }
-    },
-    [logout]
   );
 
   return (
@@ -119,9 +99,9 @@ export default function Account() {
         <Text>{email}</Text>
       </View>
       <Divider />
-      {items.map(({ key, title }) => (
+      {items.map(({ key, title, onPress }) => (
         <View key={key}>
-          <List.Item title={title} onPress={onPressItem(key)} />
+          <List.Item title={title} onPress={onPress} />
           <Divider />
         </View>
       ))}
