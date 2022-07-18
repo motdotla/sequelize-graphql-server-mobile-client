@@ -1,6 +1,8 @@
 import { View } from "react-native";
 import { useTranslation } from "react-i18next";
 import { Button, Dialog, Portal, Text } from "react-native-paper";
+import { useRequestDeleteAccount } from "~hooks/api/deleteAccount";
+import { useEffect } from "react";
 
 type Props = {
   visible: boolean;
@@ -9,6 +11,14 @@ type Props = {
 
 export default function ConfirmDeleteAccount({ visible, onDismiss }: Props) {
   const { t } = useTranslation();
+  const { loading, onSubmit, data, reset } = useRequestDeleteAccount();
+
+  useEffect(() => {
+    if (data?.success) {
+      reset();
+      onDismiss();
+    }
+  }, [data]);
 
   return (
     <Portal>
@@ -26,7 +36,14 @@ export default function ConfirmDeleteAccount({ visible, onDismiss }: Props) {
             {t("Cancel")}
           </Button>
           <View style={{ width: 8 }} />
-          <Button mode="contained">{t("Delete")}</Button>
+          <Button
+            mode="contained"
+            loading={loading}
+            disabled={loading}
+            onPress={onSubmit}
+          >
+            {t("Delete")}
+          </Button>
         </Dialog.Actions>
       </Dialog>
     </Portal>
