@@ -1,4 +1,6 @@
 import {
+  ImageInfo,
+  ImagePickerOptions,
   launchCameraAsync,
   launchImageLibraryAsync,
   MediaTypeOptions,
@@ -13,9 +15,24 @@ import Toast from "react-native-root-toast";
 type Props = {
   visible: boolean;
   onDismiss: () => void;
+  handleImage: (result: ImageInfo) => Promise<void>;
+  onRemove: () => void;
 };
 
-export default function ChangePhoto({ visible, onDismiss }: Props) {
+const pickerOptions: ImagePickerOptions = {
+  mediaTypes: MediaTypeOptions.Images,
+  allowsEditing: true,
+  aspect: [4, 3],
+  quality: 1,
+  base64: false,
+};
+
+export default function ChangePhoto({
+  visible,
+  onDismiss,
+  handleImage,
+  onRemove,
+}: Props) {
   const { t } = useTranslation();
 
   const pickImage = async () => {
@@ -26,16 +43,12 @@ export default function ChangePhoto({ visible, onDismiss }: Props) {
         t("Sorry, we need permissions for accessing photos to make this work!")
       );
     } else {
-      const result = await launchImageLibraryAsync({
-        mediaTypes: MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-        quality: 1,
-      });
+      const result = await launchImageLibraryAsync(pickerOptions);
 
       if (!result.cancelled) {
-        console.log(result);
+        handleImage(result);
       }
+      onDismiss();
     }
   };
 
@@ -47,15 +60,12 @@ export default function ChangePhoto({ visible, onDismiss }: Props) {
         t("Sorry, we need permissions for accessing camera to make this work!")
       );
     } else {
-      const result = await launchCameraAsync({
-        mediaTypes: MediaTypeOptions.Images,
-        allowsEditing: true,
-        aspect: [4, 3],
-      });
+      const result = await launchCameraAsync(pickerOptions);
 
       if (!result.cancelled) {
-        console.log(result);
+        handleImage(result);
       }
+      onDismiss();
     }
   };
 
@@ -77,7 +87,10 @@ export default function ChangePhoto({ visible, onDismiss }: Props) {
         key: "delete",
         title: t("Remove Photo"),
         icon: "delete",
-        onPress: () => null,
+        onPress: () => {
+          onRemove();
+          onDismiss();
+        },
       },
     ],
     [t]

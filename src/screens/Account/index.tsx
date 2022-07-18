@@ -16,6 +16,7 @@ import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 import ChangeFullname from "./components/ChangeFullname";
 import ChangePhoto from "./components/ChangePhoto";
+import useUploadAvatar from "~hooks/api/useUploadAvatar";
 
 export default function Account() {
   const { t } = useTranslation();
@@ -30,6 +31,7 @@ export default function Account() {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEditName, setOpenEditName] = useState(false);
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
+  const { upload, uploading } = useUploadAvatar();
 
   const toggleOpenDelete = useCallback(
     () => setOpenDelete((open) => !open),
@@ -88,7 +90,7 @@ export default function Account() {
       >
         {t("Verify your email address to secure your account.")}
       </Banner>
-      {loading && <ProgressBar indeterminate />}
+      {loading || (uploading && <ProgressBar indeterminate />)}
       <View style={styles.avatar}>
         <UserAvatar
           text={fullName[0]}
@@ -115,7 +117,12 @@ export default function Account() {
       </Snackbar>
       <ConfirmDeleteAccount visible={openDelete} onDismiss={toggleOpenDelete} />
       <ChangeFullname visible={openEditName} onDismiss={toggleOpenEditName} />
-      <ChangePhoto visible={openEditPhoto} onDismiss={toggleOpenEditPhoto} />
+      <ChangePhoto
+        visible={openEditPhoto}
+        onDismiss={toggleOpenEditPhoto}
+        handleImage={upload}
+        onRemove={() => null}
+      />
     </ScrollView>
   );
 }
