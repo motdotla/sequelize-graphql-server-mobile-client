@@ -46,7 +46,18 @@ const config: ExpoConfig = {
   web: {
     favicon: "./assets/favicon.png",
   },
-  plugins: ["sentry-expo"],
+  plugins: [
+    "sentry-expo",
+    [
+      "expo-image-picker",
+      {
+        photosPermission:
+          "Allow $(PRODUCT_NAME) to access your gallery to share photos with your team.",
+        cameraPermission:
+          "Allow $(PRODUCT_NAME) to access your camera to share images with your team.",
+      },
+    ],
+  ],
   hooks: {
     postPublish: [
       {
