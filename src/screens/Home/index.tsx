@@ -4,7 +4,7 @@ import { ProgressBar } from "react-native-paper";
 import { HomeTabParamList, IconName } from "types";
 import ErrorState from "~components/ErrorState";
 import createMaterialBottomTabNavigator from "~components/MD3BottomTabs/createMaterialBottomTabNavigator";
-import useMe from "~hooks/api/me";
+import { useMe } from "~hooks/api/me";
 import Schedule from "./Schedule";
 import Settings from "./Settings";
 

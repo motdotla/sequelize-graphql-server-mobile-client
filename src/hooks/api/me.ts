@@ -1,9 +1,10 @@
-import { useQuery } from "@apollo/client";
+import { useMutation, useQuery } from "@apollo/client";
 import { useCallback } from "react";
-import { UserPayload } from "types";
-import { ME } from "~graphql/queries/user";
+import Toast from "react-native-root-toast";
+import { FullnameInput, UserMutationResponse, UserPayload } from "types";
+import { ME, UPDATE_FULLNAME } from "~graphql/queries/user";
 
-export default function useMe() {
+export function useMe() {
   const { loading, data, error, refetch } = useQuery<{ me: UserPayload }>(ME);
 
   const onRefresh = useCallback(() => refetch(), [refetch]);
@@ -13,5 +14,31 @@ export default function useMe() {
     error,
     onRefresh,
     data: data?.me,
+  };
+}
+
+export function useUpdateFullname() {
+  const [mutate, { loading, error, data, reset }] = useMutation<
+    {
+      updateCurrentUserFullname: UserMutationResponse;
+    },
+    { input: FullnameInput }
+  >(UPDATE_FULLNAME, {
+    onCompleted: ({ updateCurrentUserFullname }) => {
+      Toast.show(updateCurrentUserFullname.message);
+    },
+  });
+
+  const onSubmit = useCallback(
+    (input: FullnameInput) => mutate({ variables: { input } }),
+    [mutate]
+  );
+
+  return {
+    loading,
+    error,
+    reset,
+    onSubmit,
+    data: data?.updateCurrentUserFullname,
   };
 }

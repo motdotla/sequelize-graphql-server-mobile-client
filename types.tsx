@@ -95,6 +95,11 @@ export type SocialLoginInput = {
   token: string;
 };
 
+export type FullnameInput = {
+  firstName: string;
+  lastName: string;
+};
+
 // Response
 
 export interface Response {
@@ -147,6 +152,10 @@ type User = {
 };
 
 export interface UserPayload extends Response {
+  user: User;
+}
+
+export interface UserMutationResponse extends RequestFormResponse {
   user: User;
 }
 

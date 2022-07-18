@@ -11,7 +11,7 @@ import {
 } from "react-native-paper";
 import UserAvatar from "~components/UserAvatar";
 import useLogout from "~hooks/api/logout";
-import useMe from "~hooks/api/me";
+import { useMe } from "~hooks/api/me";
 import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 
