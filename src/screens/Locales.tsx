@@ -4,8 +4,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
 import { Locale, RootStackScreenProps } from "types";
 import ErrorState from "~components/ErrorState";
-import { useGetLocales, useUpdateLocale } from "~hooks/api/useLocales";
-import useMe from "~hooks/api/useMe";
+import { useGetLocales, useUpdateLocale } from "~hooks/api/locales";
+import useMe from "~hooks/api/me";
 
 const keyExtractor = (item: Locale) => item.code;
 

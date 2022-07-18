@@ -9,7 +9,7 @@ import * as yup from "yup";
 import * as Localization from "expo-localization";
 import Button from "~components/Button";
 import { RegisterInput } from "types";
-import useRegisterWithEmail from "~hooks/api/useRegisterWithEmail";
+import useRegisterWithEmail from "~hooks/api/registerWithEmail";
 
 export default function Register() {
   const { t } = useTranslation();

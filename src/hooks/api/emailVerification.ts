@@ -3,7 +3,7 @@ import { REQUEST_EMAIL_VERIFICATION } from "~graphql/queries/auth";
 import { Response } from "types";
 import { useCallback } from "react";
 
-export default function useRequestEmailVerification() {
+export function useRequestEmailVerification() {
   const [mutate, { loading, data, reset }] = useMutation<
     { requestEmailVerification: Response },
     { email: string }

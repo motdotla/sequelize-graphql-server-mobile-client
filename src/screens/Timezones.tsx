@@ -4,8 +4,8 @@ import { View, StyleSheet, FlatList } from "react-native";
 import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
 import { RootStackScreenProps, Timezone } from "types";
 import ErrorState from "~components/ErrorState";
-import { useGetTimezones, useUpdateTimezone } from "~hooks/api/useTimezones";
-import useMe from "~hooks/api/useMe";
+import { useGetTimezones, useUpdateTimezone } from "~hooks/api/timezones";
+import useMe from "~hooks/api/me";
 
 const keyExtractor = (item: Timezone) => item.timeZone;
 

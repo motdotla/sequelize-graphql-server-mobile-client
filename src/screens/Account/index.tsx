@@ -10,9 +10,9 @@ import {
   Snackbar,
 } from "react-native-paper";
 import UserAvatar from "~components/UserAvatar";
-import useLogout from "~hooks/api/useLogout";
-import useMe from "~hooks/api/useMe";
-import useRequestEmailVerification from "~hooks/api/useRequestEmailVerification";
+import useLogout from "~hooks/api/logout";
+import useMe from "~hooks/api/me";
+import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 
 export default function Account() {

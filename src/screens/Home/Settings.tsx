@@ -4,7 +4,7 @@ import { View, ScrollView, StyleSheet, Platform } from "react-native";
 import { Appbar, List, Text } from "react-native-paper";
 import Constants from "expo-constants";
 import * as MailComposer from "expo-mail-composer";
-import useMe from "~hooks/api/useMe";
+import useMe from "~hooks/api/me";
 import { usePreferences } from "~hooks/app";
 import { HomeTabScreenProps } from "types";
 import ThemePicker from "./components/ThemePicker";

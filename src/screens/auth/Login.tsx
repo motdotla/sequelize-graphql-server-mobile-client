@@ -7,7 +7,7 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { LoginInput, RootStackScreenProps } from "types";
-import useLoginWithEmail from "~hooks/api/useLoginWithEmail";
+import useLoginWithEmail from "~hooks/api/loginWithEmail";
 import Button from "~components/Button";
 import GoogleLogin from "./GoogleLogin";
 
