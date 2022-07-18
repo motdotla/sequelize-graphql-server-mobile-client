@@ -2,7 +2,6 @@ import { useCallback, useState } from "react";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
 import { ImageInfo } from "expo-image-picker";
-import * as mime from "mime";
 import { useAuth } from "~hooks/app";
 
 export default function useUploadAvatar() {
@@ -15,12 +14,15 @@ export default function useUploadAvatar() {
     setUploading(true);
     try {
       let file;
-      const type = mime.getType(uri)!;
       if (Platform.OS === "web") {
         const img = await fetch(uri);
         const blob = await img.blob();
+        const mimeStartAt = uri.indexOf("image/");
+        const mimeEndAt = uri.indexOf(";");
+        const mimetype = uri.slice(mimeStartAt, mimeEndAt);
+
         file = new File([blob], "avatar", {
-          type,
+          type: mimetype,
         });
       }
 
