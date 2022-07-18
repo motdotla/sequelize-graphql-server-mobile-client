@@ -4,6 +4,7 @@ import { View, ScrollView, StyleSheet, Platform } from "react-native";
 import { Appbar, List, Text } from "react-native-paper";
 import Constants from "expo-constants";
 import * as MailComposer from "expo-mail-composer";
+import capitalize from "lodash.capitalize";
 import { useMe } from "~hooks/api/me";
 import { usePreferences } from "~hooks/app";
 import { HomeTabScreenProps } from "types";
@@ -59,7 +60,7 @@ export default function Settings({
       {
         key: "theme",
         title: t("Theme"),
-        description: t(theme!),
+        description: capitalize(t(theme!)),
         icon: "theme-light-dark",
       },
       {

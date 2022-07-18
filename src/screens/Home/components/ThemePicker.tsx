@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Dialog, Portal, RadioButton } from "react-native-paper";
+import capitalize from "lodash.capitalize";
 import { AppColorScheme } from "types";
 import { usePreferences } from "~hooks/app";
 
@@ -31,7 +32,7 @@ export default function ThemePicker({ visible, onDismiss }: Props) {
             {options.map((key) => (
               <RadioButton.Item
                 key={key}
-                label={t(key as string)}
+                label={capitalize(t(key as string))}
                 value={key as string}
               />
             ))}
