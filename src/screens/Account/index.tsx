@@ -16,7 +16,7 @@ import { useRequestEmailVerification } from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 import ChangeFullname from "./components/ChangeFullname";
 import ChangePhoto from "./components/ChangePhoto";
-import useUploadAvatar from "~hooks/api/useUploadAvatar";
+import useUploadAvatar from "~hooks/api/uploadAvatar";
 
 export default function Account() {
   const { t } = useTranslation();
