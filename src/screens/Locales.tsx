@@ -62,7 +62,7 @@ export default function Locales({
         data={data?.filter((item) =>
           item.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )}
-        initialNumToRender={10}
+        initialNumToRender={0}
         keyboardShouldPersistTaps="always"
         keyExtractor={keyExtractor}
         renderItem={renderItem}

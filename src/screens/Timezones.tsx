@@ -62,7 +62,7 @@ export default function Timezones({
         data={data?.filter((item) =>
           item.timeZone.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )}
-        initialNumToRender={10}
+        initialNumToRender={0}
         keyboardShouldPersistTaps="always"
         keyExtractor={keyExtractor}
         renderItem={renderItem}
