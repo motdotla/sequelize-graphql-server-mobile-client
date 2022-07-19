@@ -10,12 +10,26 @@ import {
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useColorScheme } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import * as Linking from "expo-linking";
+import Constants from "expo-constants";
 import { Provider as PaperProvider } from "react-native-paper";
 import { useTranslation } from "react-i18next";
-import { NavigationContainer } from "@react-navigation/native";
+import { LinkingOptions, NavigationContainer } from "@react-navigation/native";
 import getTheme from "~config/theme";
 import Navigator from "~screens/Navigator";
 import { usePreferences } from "~hooks/app";
+import { RootStackParamList } from "types";
+
+const prefix = Linking.createURL("/");
+const linking: LinkingOptions<RootStackParamList> = {
+  prefixes: [prefix, Constants.manifest?.extra?.webPrefix],
+  config: {
+    screens: {
+      ResetPassword: "/reset_password",
+      Account: "/verify_email",
+    },
+  },
+};
 
 export default function Main() {
   const { ready } = useTranslation();
@@ -56,7 +70,11 @@ export default function Main() {
 
   return (
     <PaperProvider theme={appTheme}>
-      <NavigationContainer theme={appTheme} onReady={onNavigatorReady}>
+      <NavigationContainer
+        linking={linking}
+        theme={appTheme}
+        onReady={onNavigatorReady}
+      >
         <Navigator />
       </NavigationContainer>
     </PaperProvider>

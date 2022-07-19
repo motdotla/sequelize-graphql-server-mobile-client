@@ -4,6 +4,7 @@ import { name, version } from "./package.json";
 
 const {
   APP_NAME,
+  APP_SCHEME,
   SENTRY_ORG,
   SENTRY_PROJECT,
   SENTRY_AUTH_TOKEN,
@@ -23,6 +24,7 @@ const enableInExpoDevelopment = ENV === "development";
 const config: ExpoConfig = {
   name: APP_NAME || name,
   slug: name,
+  scheme: APP_SCHEME,
   version: version,
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -90,6 +92,7 @@ const config: ExpoConfig = {
     graphqlEndpoint: `${API_BASE_URL}/graphql`,
     restEndpoint: `${API_BASE_URL}/v1`,
     email: CONTACT_EMAIL,
+    webPrefix: `${ANDROID_SCHEME}://${ANDROID_HOST}`,
   },
 };
 
