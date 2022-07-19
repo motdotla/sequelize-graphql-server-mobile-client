@@ -1,6 +1,9 @@
 import { useMutation } from "@apollo/client";
-import { REQUEST_EMAIL_VERIFICATION } from "~graphql/queries/auth";
-import { Response } from "types";
+import {
+  REQUEST_EMAIL_VERIFICATION,
+  VERIFY_EMAIL,
+} from "~graphql/queries/auth";
+import { RequestFormResponse, ResetPasswordInput, Response } from "types";
 import { useCallback } from "react";
 
 export function useRequestEmailVerification() {
@@ -23,5 +26,29 @@ export function useRequestEmailVerification() {
     onSubmit,
     reset,
     data: data?.requestEmailVerification,
+  };
+}
+
+export function useVerifyEmail() {
+  const [mutate, { loading, data, reset, error }] = useMutation<{
+    verifyEmail: RequestFormResponse;
+  }>(VERIFY_EMAIL);
+
+  const onSubmit = useCallback(
+    (input: ResetPasswordInput) =>
+      mutate({
+        variables: {
+          input,
+        },
+      }),
+    [mutate]
+  );
+
+  return {
+    loading,
+    error,
+    reset,
+    onSubmit,
+    data: data?.verifyEmail,
   };
 }
