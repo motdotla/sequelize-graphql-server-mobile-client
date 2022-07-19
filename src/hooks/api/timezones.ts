@@ -6,7 +6,9 @@ import { GET_TIMEZONES, UPDATE_TIMEZONE } from "~graphql/queries/user";
 export function useGetTimezones() {
   const { loading, data, error, refetch } = useQuery<{
     getTimeZones: Timezone[];
-  }>(GET_TIMEZONES);
+  }>(GET_TIMEZONES, {
+    fetchPolicy: "cache-first",
+  });
 
   const onRefresh = useCallback(() => refetch(), [refetch]);
 

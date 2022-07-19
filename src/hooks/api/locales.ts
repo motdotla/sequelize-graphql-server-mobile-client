@@ -5,7 +5,10 @@ import { GET_LOCALES, UPDATE_LOCALE } from "~graphql/queries/user";
 
 export function useGetLocales() {
   const { loading, data, error, refetch } = useQuery<{ getLocales: Locale[] }>(
-    GET_LOCALES
+    GET_LOCALES,
+    {
+      fetchPolicy: "cache-first",
+    }
   );
 
   const onRefresh = useCallback(() => refetch(), [refetch]);
