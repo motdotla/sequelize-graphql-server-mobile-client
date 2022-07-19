@@ -12,8 +12,10 @@ const {
   LOCIZE_PROJECT_ID,
   ENV,
   CLIENT_ID,
-  BASE_URL,
+  API_BASE_URL,
   CONTACT_EMAIL,
+  ANDROID_SCHEME,
+  ANDROID_HOST,
 } = process.env;
 
 const enableInExpoDevelopment = ENV === "development";
@@ -42,6 +44,14 @@ const config: ExpoConfig = {
       foregroundImage: "./assets/adaptive-icon.png",
       backgroundColor: "#FFFFFF",
     },
+    intentFilters: [
+      {
+        action: "VIEW",
+        autoVerify: true,
+        data: [{ scheme: ANDROID_SCHEME, host: ANDROID_HOST }],
+        category: ["BROWSABLE", "DEFAULT"],
+      },
+    ],
   },
   web: {
     favicon: "./assets/favicon.png",
@@ -77,8 +87,8 @@ const config: ExpoConfig = {
     locizeApiKey: LOCIZE_API_KEY,
     locizeProjectId: LOCIZE_PROJECT_ID,
     clientId: CLIENT_ID,
-    graphqlEndpoint: `${BASE_URL}/graphql`,
-    restEndpoint: `${BASE_URL}/v1`,
+    graphqlEndpoint: `${API_BASE_URL}/graphql`,
+    restEndpoint: `${API_BASE_URL}/v1`,
     email: CONTACT_EMAIL,
   },
 };
