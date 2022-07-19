@@ -15,12 +15,8 @@ const cache = new InMemoryCache({
         },
       },
     },
-    User: {
-      fields: {
-        avatar: {
-          keyArgs: false,
-        },
-      },
+    Photo: {
+      keyFields: false,
     },
   },
 });

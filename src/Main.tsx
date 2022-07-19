@@ -24,6 +24,7 @@ const prefix = Linking.createURL("/");
 const linking: LinkingOptions<RootStackParamList> = {
   prefixes: [prefix, Constants.manifest?.extra?.universalPrefix],
   config: {
+    initialRouteName: "Home",
     screens: {
       ResetPassword: "/reset_password",
       Account: "/verify_email",
