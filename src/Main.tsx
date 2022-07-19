@@ -22,7 +22,7 @@ import { RootStackParamList } from "types";
 
 const prefix = Linking.createURL("/");
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [prefix, Constants.manifest?.extra?.webPrefix],
+  prefixes: [prefix, Constants.manifest?.extra?.universalPrefix],
   config: {
     screens: {
       ResetPassword: "/reset_password",

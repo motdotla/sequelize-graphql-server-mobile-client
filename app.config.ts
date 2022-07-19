@@ -5,6 +5,8 @@ import { name, version } from "./package.json";
 const {
   APP_NAME,
   APP_SCHEME,
+  WEB_SCHEME,
+  WEB_HOST,
   SENTRY_ORG,
   SENTRY_PROJECT,
   SENTRY_AUTH_TOKEN,
@@ -15,8 +17,6 @@ const {
   CLIENT_ID,
   API_BASE_URL,
   CONTACT_EMAIL,
-  ANDROID_SCHEME,
-  ANDROID_HOST,
 } = process.env;
 
 const enableInExpoDevelopment = ENV === "development";
@@ -50,7 +50,7 @@ const config: ExpoConfig = {
       {
         action: "VIEW",
         autoVerify: false,
-        data: [{ scheme: ANDROID_SCHEME, host: ANDROID_HOST }],
+        data: [{ scheme: WEB_SCHEME, host: WEB_HOST }],
         category: ["BROWSABLE", "DEFAULT"],
       },
     ],
@@ -92,7 +92,7 @@ const config: ExpoConfig = {
     graphqlEndpoint: `${API_BASE_URL}/graphql`,
     restEndpoint: `${API_BASE_URL}/v1`,
     email: CONTACT_EMAIL,
-    webPrefix: `${ANDROID_SCHEME}://${ANDROID_HOST}`,
+    universalPrefix: `${WEB_SCHEME}://${WEB_HOST}`,
   },
 };
 
