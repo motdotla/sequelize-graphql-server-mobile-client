@@ -50,8 +50,7 @@ export default function useUploadAvatar() {
           client_id: Constants.manifest?.extra?.clientId,
         },
       });
-      const data = (await response.json()) as UserPayload;
-      const { user, success, message } = data;
+      const { user, success, message } = (await response.json()) as UserPayload;
       if (success) {
         client.writeFragment({
           id: `User:${user.id}`,
