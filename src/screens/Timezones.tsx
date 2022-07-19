@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { View, StyleSheet, FlatList } from "react-native";
-import { ProgressBar, RadioButton, Searchbar } from "react-native-paper";
+import { RadioButton, Searchbar } from "react-native-paper";
 import { RootStackScreenProps, Timezone } from "types";
 import ErrorState from "~components/ErrorState";
 import { useGetTimezones, useUpdateTimezone } from "~hooks/api/timezones";
@@ -38,10 +38,6 @@ export default function Timezones({
     [timezone]
   );
 
-  if (loading) {
-    return <ProgressBar indeterminate />;
-  }
-
   if (error) {
     return <ErrorState message={error.message} onRetry={onRefresh} />;
   }
@@ -57,12 +53,11 @@ export default function Timezones({
         onIconPress={navigation.goBack}
         theme={{ roundness: 0 }}
       />
-      {submitting && <ProgressBar indeterminate />}
       <FlatList
         data={data?.filter((item) =>
           item.timeZone.toLocaleLowerCase().includes(search.toLocaleLowerCase())
         )}
-        initialNumToRender={0}
+        refreshing={loading || submitting}
         keyboardShouldPersistTaps="always"
         keyExtractor={keyExtractor}
         renderItem={renderItem}
