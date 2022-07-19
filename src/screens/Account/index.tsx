@@ -91,7 +91,7 @@ export default function Account() {
       >
         {t("Verify your email address to secure your account.")}
       </Banner>
-      {loading || uploading || (removing && <ProgressBar indeterminate />)}
+      {(loading || uploading || removing) && <ProgressBar indeterminate />}
       <View style={styles.avatar}>
         <UserAvatar
           text={fullName[0]}

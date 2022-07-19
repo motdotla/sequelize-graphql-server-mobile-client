@@ -135,3 +135,12 @@ export const GET_TIMEZONES = gql`
     }
   }
 `;
+
+export const USER_AVATAR_FRAGMENT = gql`
+  fragment Avatar on User {
+    avatar {
+      url
+      thumbnail
+    }
+  }
+`;
