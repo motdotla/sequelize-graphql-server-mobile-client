@@ -4,9 +4,9 @@ import { name, version } from "./package.json";
 
 const {
   APP_NAME,
-  APP_SCHEME,
-  WEB_SCHEME,
-  WEB_HOST,
+  DEEP_LINK_SCHEME,
+  UNIVERSAL_LINK_SCHEME,
+  UNIVERSAL_LINK_HOST,
   SENTRY_ORG,
   SENTRY_PROJECT,
   SENTRY_AUTH_TOKEN,
@@ -24,7 +24,7 @@ const enableInExpoDevelopment = ENV === "development";
 const config: ExpoConfig = {
   name: APP_NAME || name,
   slug: name,
-  scheme: APP_SCHEME,
+  scheme: DEEP_LINK_SCHEME,
   version: version,
   orientation: "portrait",
   icon: "./assets/icon.png",
@@ -50,7 +50,7 @@ const config: ExpoConfig = {
       {
         action: "VIEW",
         autoVerify: false,
-        data: [{ scheme: WEB_SCHEME, host: WEB_HOST }],
+        data: [{ scheme: UNIVERSAL_LINK_SCHEME, host: UNIVERSAL_LINK_HOST }],
         category: ["BROWSABLE", "DEFAULT"],
       },
     ],
@@ -92,7 +92,7 @@ const config: ExpoConfig = {
     graphqlEndpoint: `${API_BASE_URL}/graphql`,
     restEndpoint: `${API_BASE_URL}/v1`,
     email: CONTACT_EMAIL,
-    universalPrefix: `${WEB_SCHEME}://${WEB_HOST}`,
+    universalPrefix: `${UNIVERSAL_LINK_SCHEME}://${UNIVERSAL_LINK_HOST}`,
   },
 };
 
