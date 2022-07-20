@@ -1,4 +1,4 @@
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { StyleSheet, View, TextInput as RTextInput } from "react-native";
 import { useTranslation } from "react-i18next";
 import { ScrollView } from "react-native-gesture-handler";
@@ -17,7 +17,7 @@ export default function Register() {
   const emailInputRef = useRef<RTextInput>(null);
   const passwordInputRef = useRef<RTextInput>(null);
 
-  const { loading, onSubmit } = useRegisterWithEmail();
+  const { loading, onSubmit, data } = useRegisterWithEmail();
 
   const schema = useMemo(
     () =>
@@ -48,6 +48,7 @@ export default function Register() {
     control,
     handleSubmit,
     formState: { errors, touchedFields },
+    setError,
   } = useForm<RegisterInput>({
     resolver: yupResolver(schema),
     defaultValues: {
@@ -59,6 +60,18 @@ export default function Register() {
       timezone: Localization.timezone,
     },
   });
+
+  useEffect(() => {
+    if (data?.errors) {
+      data.errors.map((e) =>
+        setError(
+          e.field as keyof RegisterInput,
+          { message: e.message },
+          { shouldFocus: true }
+        )
+      );
+    }
+  }, [data]);
 
   return (
     <ScrollView
