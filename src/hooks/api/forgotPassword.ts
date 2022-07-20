@@ -5,7 +5,7 @@ import {
   RequestFormResponse,
   ResetPasswordInput,
 } from "types";
-import { REQUEST_PASSWORD_RESET } from "~graphql/queries/auth";
+import { REQUEST_PASSWORD_RESET, RESET_PASSWORD } from "~graphql/queries/auth";
 
 export function useForgotPassword() {
   const [mutate, { loading, data, error, reset }] = useMutation<
@@ -40,7 +40,7 @@ export function useResetPassword() {
       resetPassword: RequestFormResponse;
     },
     { input: ResetPasswordInput }
-  >(REQUEST_PASSWORD_RESET);
+  >(RESET_PASSWORD);
 
   const onSubmit = useCallback(
     (input: ResetPasswordInput) =>
