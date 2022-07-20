@@ -27,7 +27,9 @@ export default function ResetPassword({
             .string()
             .required(t("Type your new password"))
             .min(6, t("Password must be at least 6 characters long")),
-          token: yup.string().required(t("The link you followed is broken.")),
+          token: yup
+            .string()
+            .required(t("The link you followed may be broken.")),
         })
         .required(),
     [t]

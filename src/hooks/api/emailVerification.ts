@@ -1,10 +1,12 @@
 import { useMutation } from "@apollo/client";
+import Toast from "react-native-root-toast";
 import {
   REQUEST_EMAIL_VERIFICATION,
   VERIFY_EMAIL,
 } from "~graphql/queries/auth";
-import { RequestFormResponse, ResetPasswordInput, Response } from "types";
+import { RequestFormResponse, Response } from "types";
 import { useCallback } from "react";
+import { ME } from "~graphql/queries/user";
 
 export function useRequestEmailVerification() {
   const [mutate, { loading, data, reset }] = useMutation<
@@ -30,16 +32,24 @@ export function useRequestEmailVerification() {
 }
 
 export function useVerifyEmail() {
-  const [mutate, { loading, data, reset, error }] = useMutation<{
-    verifyEmail: RequestFormResponse;
-  }>(VERIFY_EMAIL);
+  const [mutate, { loading, data, reset, error }] = useMutation<
+    {
+      verifyEmail: RequestFormResponse;
+    },
+    { token: string }
+  >(VERIFY_EMAIL, {
+    onCompleted: ({ verifyEmail }) => {
+      Toast.show(verifyEmail.message);
+    },
+  });
 
   const onSubmit = useCallback(
-    (input: ResetPasswordInput) =>
+    (token: string) =>
       mutate({
         variables: {
-          input,
+          token,
         },
+        refetchQueries: [ME],
       }),
     [mutate]
   );

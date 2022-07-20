@@ -29,7 +29,9 @@ export type RootStackParamList = {
     token: string;
   };
   Home: NavigatorScreenParams<HomeTabParamList>;
-  Account: undefined;
+  Account: {
+    token: string | undefined;
+  };
   Notifications: undefined;
   Locales: undefined;
   Timezones: undefined;

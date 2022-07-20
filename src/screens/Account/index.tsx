@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, View } from "react-native";
 import {
@@ -12,13 +12,17 @@ import {
 import UserAvatar from "~components/UserAvatar";
 import useLogout from "~hooks/api/logout";
 import { useMe, useRemoveAvatar } from "~hooks/api/me";
-import { useRequestEmailVerification } from "~hooks/api/emailVerification";
+import {
+  useRequestEmailVerification,
+  useVerifyEmail,
+} from "~hooks/api/emailVerification";
 import ConfirmDeleteAccount from "./components/ConfirmDeleteAccount";
 import ChangeFullname from "./components/ChangeFullname";
 import ChangePhoto from "./components/ChangePhoto";
 import useUploadAvatar from "~hooks/api/uploadAvatar";
+import { RootStackScreenProps } from "types";
 
-export default function Account() {
+export default function Account({ route }: RootStackScreenProps<"Account">) {
   const { t } = useTranslation();
   const { data } = useMe();
   const { loading, logout } = useLogout();
@@ -33,6 +37,14 @@ export default function Account() {
   const [openEditPhoto, setOpenEditPhoto] = useState(false);
   const { upload, uploading } = useUploadAvatar();
   const { onSubmit: handleRemoveAvatar, loading: removing } = useRemoveAvatar();
+  const { loading: verifying, onSubmit: onVerify } = useVerifyEmail();
+  const token = route.params?.token;
+
+  useEffect(() => {
+    if (token) {
+      onVerify(token);
+    }
+  }, [token]);
 
   const toggleOpenDelete = useCallback(
     () => setOpenDelete((open) => !open),
@@ -91,7 +103,9 @@ export default function Account() {
       >
         {t("Verify your email address to secure your account.")}
       </Banner>
-      {(loading || uploading || removing) && <ProgressBar indeterminate />}
+      {(loading || uploading || removing || verifying) && (
+        <ProgressBar indeterminate />
+      )}
       <View style={styles.avatar}>
         <UserAvatar
           text={fullName[0]}

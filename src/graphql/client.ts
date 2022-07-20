@@ -33,10 +33,13 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-const errorLink = onError(({ networkError }) => {
+const errorLink = onError(({ networkError, graphQLErrors }) => {
   if (networkError) {
     Toast.show(networkError.message);
   }
+  graphQLErrors?.forEach((err) => {
+    Toast.show(err.message);
+  });
 });
 
 const client = new ApolloClient({
