@@ -25,10 +25,12 @@ export default function Register() {
         .object({
           firstName: yup
             .string()
+            .trim()
             .required(t("What's your first name?"))
             .min(1, t("Your name is too short")),
           lastName: yup
             .string()
+            .trim()
             .required(t("What's your last name?"))
             .min(1, t("Your name is too short")),
           email: yup
@@ -38,7 +40,9 @@ export default function Register() {
           password: yup
             .string()
             .required(t("Type your password"))
-            .min(6, t("Password must be at least 6 characters long")),
+            .min(6, ({ min }) =>
+              t("Password must be at least {{min}} characters long", { min })
+            ),
         })
         .required(),
     [t]

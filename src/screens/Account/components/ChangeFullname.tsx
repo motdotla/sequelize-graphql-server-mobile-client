@@ -96,18 +96,21 @@ export default function ChangeFullname({ visible, onDismiss }: Props) {
           />
         </Dialog.Content>
         <Dialog.Actions>
-          <Button mode="contained-tonal" onPress={onDismiss}>
-            {t("Cancel")}
-          </Button>
-          <View style={{ width: 8 }} />
-          <Button
-            mode="contained"
-            loading={loading}
-            disabled={loading}
-            onPress={handleSubmit(onSubmit)}
-          >
-            {t("Save")}
-          </Button>
+          <View>
+            <Button mode="contained-tonal" onPress={onDismiss}>
+              {t("Cancel")}
+            </Button>
+          </View>
+          <View>
+            <Button
+              mode="contained"
+              loading={loading}
+              disabled={loading}
+              onPress={handleSubmit(onSubmit)}
+            >
+              {t("Save")}
+            </Button>
+          </View>
         </Dialog.Actions>
       </Dialog>
     </Portal>

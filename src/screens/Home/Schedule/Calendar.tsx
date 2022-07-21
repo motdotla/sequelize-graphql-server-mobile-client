@@ -1,19 +1,30 @@
 import { BackHandler, View, StyleSheet } from "react-native";
-import { FAB, Portal, Text } from "react-native-paper";
+import { FAB, Portal } from "react-native-paper";
 import { useTranslation } from "react-i18next";
 import { useCallback, useState } from "react";
 import { useFocusEffect, useIsFocused } from "@react-navigation/native";
 import { useDrawerStatus } from "@react-navigation/drawer";
+import { ScheduleScreenProps } from "types";
+import AddEvent from "./AddEvent";
 
-export default function Calendar() {
+export default function Calendar({
+  navigation,
+}: ScheduleScreenProps<"Calendar">) {
   const { t } = useTranslation();
   const isFocused = useIsFocused();
   const drawerStatus = useDrawerStatus();
   const [openFab, setOpenFab] = useState(false);
+  const [openAddEvent, setOpenAddEvent] = useState(false);
   const onFabStateChange = useCallback(
     ({ open }: { open: boolean }) => setOpenFab(open),
     []
   );
+  const closeAddEvent = useCallback(() => setOpenAddEvent(false), []);
+  const onPress = useCallback(() => {
+    if (openFab) {
+      setOpenAddEvent(true);
+    }
+  }, [openFab]);
 
   const visible = isFocused && drawerStatus === "closed";
 
@@ -36,38 +47,24 @@ export default function Calendar() {
 
   return (
     <View style={styles.container}>
-      <Text variant="displayLarge">{t("My App")}</Text>
-      <Text variant="displayMedium">{t("My App")}</Text>
-      <Text variant="displaySmall">{t("My App")}</Text>
-      <Text variant="headlineLarge">{t("My App")}</Text>
-      <Text variant="headlineMedium">{t("My App")}</Text>
-      <Text variant="headlineSmall">{t("My App")}</Text>
-      <Text variant="titleLarge">{t("My App")}</Text>
-      <Text variant="titleMedium">{t("My App")}</Text>
-      <Text variant="titleSmall">{t("My App")}</Text>
-      <Text variant="bodyLarge">{t("My App")}</Text>
-      <Text variant="bodyMedium">{t("My App")}</Text>
-      <Text variant="bodySmall">{t("My App")}</Text>
-      <Text variant="labelLarge">{t("My App")}</Text>
-      <Text variant="labelMedium">{t("My App")}</Text>
-      <Text variant="labelSmall">{t("My App")}</Text>
       <Portal>
         <FAB.Group
           visible={visible}
           open={openFab}
           icon={openFab ? "calendar-today" : "plus"}
           actions={[
-            { icon: "pin", label: t("Pin schedule"), onPress: () => null },
             {
               icon: "pencil",
               label: t("Create schedule"),
-              onPress: () => null,
+              onPress: () => navigation.navigate("NewSchedule"),
             },
           ]}
           onStateChange={onFabStateChange}
           style={styles.fab}
+          onPress={onPress}
         />
       </Portal>
+      <AddEvent visible={openAddEvent} onDismiss={closeAddEvent} />
     </View>
   );
 }

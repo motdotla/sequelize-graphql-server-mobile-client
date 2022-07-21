@@ -17,6 +17,7 @@ import Account from "./Account";
 import Notifications from "./Notifications";
 import Timezones from "./Timezones";
 import Locales from "./Locales";
+import NewSchedule from "./NewSchedule";
 
 function Header({ navigation, route, back, options }: NativeStackHeaderProps) {
   return (
@@ -119,6 +120,14 @@ export default function Navigator() {
               options={{
                 headerShown: false,
                 title: t("Locales"),
+              }}
+            />
+            <Stack.Screen
+              name="NewSchedule"
+              component={NewSchedule}
+              options={{
+                headerShown: false,
+                title: t("New Schedule"),
               }}
             />
           </Stack.Group>

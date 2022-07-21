@@ -32,18 +32,21 @@ export default function ConfirmDeleteAccount({ visible, onDismiss }: Props) {
           </Text>
         </Dialog.Content>
         <Dialog.Actions>
-          <Button mode="contained-tonal" onPress={onDismiss}>
-            {t("Cancel")}
-          </Button>
-          <View style={{ width: 8 }} />
-          <Button
-            mode="contained"
-            loading={loading}
-            disabled={loading}
-            onPress={onSubmit}
-          >
-            {t("Delete")}
-          </Button>
+          <View>
+            <Button mode="contained-tonal" onPress={onDismiss}>
+              {t("Cancel")}
+            </Button>
+          </View>
+          <View>
+            <Button
+              mode="contained"
+              loading={loading}
+              disabled={loading}
+              onPress={onSubmit}
+            >
+              {t("Delete")}
+            </Button>
+          </View>
         </Dialog.Actions>
       </Dialog>
     </Portal>

@@ -35,6 +35,7 @@ export type RootStackParamList = {
   Notifications: undefined;
   Locales: undefined;
   Timezones: undefined;
+  NewSchedule: undefined;
 };
 
 export type RootStackScreenProps<T extends keyof RootStackParamList> =
@@ -100,6 +101,17 @@ export type SocialLoginInput = {
 export type FullnameInput = {
   firstName: string;
   lastName: string;
+};
+
+export type EventInput = {
+  id?: string;
+  title: string;
+};
+
+export type ScheduleInput = {
+  id?: string;
+  title: string;
+  events: EventInput[];
 };
 
 // Response
