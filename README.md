@@ -16,6 +16,7 @@ React Native client template for [Sequelize GraphQL Server Template](https://git
 - [Expo](https://docs.expo.dev/)
 - [Apollo Client](https://www.apollographql.com/docs/react/)
 - [React Native Paper](https://callstack.github.io/react-native-paper/index.html)
+- [![dotenv-vault](https://badge.dotenv.org/works-with.svg?r=1)](https://www.dotenv.org/r/github.com/dotenv-org/dotenv-vault?r=1)
 
 ## Prerequisites
 
